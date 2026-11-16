@@ -1,0 +1,36 @@
+name: Daily JS Lesson Bot
+
+on:
+  schedule:
+    - cron: '0 9,15 * * *' # Runs at 09:00 UTC and 15:00 UTC daily
+  workflow_dispatch: # Allows manual triggering from the GitHub UI
+
+permissions:
+  contents: write # Required for the GitHub Action to commit files back to the repo
+
+jobs:
+  post-lesson:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Bot Script
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+        run: node index.js
+
+      - name: Commit updated state
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add lessons.json
+          # The || echo ensures the workflow doesn't fail if there are no changes to commit
+          git commit -m "chore: remove posted lesson from lessons.json" || echo "No changes to commit"
+          git push
