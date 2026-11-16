@@ -1,9 +1,5 @@
 [
   {
-    "topic": "4. JS Syntax Rules (Comments, statements, and semicolons)",
-    "content": "<b>JavaScript: 4. JS Syntax Rules</b>\n\nJavaScript uses C-style syntax, executing statements sequentially. While Automatic Semicolon Insertion (ASI) often makes semicolons optional, omitting them can lead to edge-case bugs, especially before IIFEs or array destructuring.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">const a = 1; // Explicit semicolon\nlet b = 2;   // ASI handles this\nconsole.log(a + b);</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">3</code></pre>"
-  },
-  {
     "topic": "5. The V8 Engine: A brief intro to how JS runs",
     "content": "<b>JavaScript: 5. The V8 Engine</b>\n\nV8 is Google's open-source high-performance JS engine written in C++. It parses JavaScript, translates it to an Abstract Syntax Tree (AST), and uses Just-In-Time (JIT) compilation to convert it directly to fast machine code.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">// V8 optimizes monomorphic functions heavily\nconst add = (a, b) => a + b;\nconsole.log(add(5, 10)); // JIT optimizes for Number inputs</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">15</code></pre>"
   },
