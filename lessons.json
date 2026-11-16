@@ -1,9 +1,5 @@
 [
   {
-    "topic": "2. Adding JavaScript to HTML (Inline vs External scripts)",
-    "content": "<b>JavaScript: 2. Adding JavaScript to HTML</b>\n\nJS can be embedded directly in HTML via inline &lt;script&gt; tags or linked externally using the src attribute. External scripts with the defer attribute are preferred for modern, non-blocking DOM parsing.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">// In index.html\n// &lt;script src=\"app.js\" defer&gt;&lt;/script&gt;\nconsole.log('External script loaded asynchronously');</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">External script loaded asynchronously</code></pre>"
-  },
-  {
     "topic": "3. The Developer Console (console.log and debugging)",
     "content": "<b>JavaScript: 3. The Developer Console</b>\n\nThe console object provides access to the browser's debugging console. Beyond console.log(), methods like table(), warn(), and error() help format complex debugging data.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">const user = { id: 1, role: 'admin' };\nconsole.table(user);\nconsole.error('Critical failure simulated');</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">┌─────────┬─────────┐\n│ (index) │ Values  │\n├─────────┼─────────┤\n│ id      │ 1       │\n│ role    │ 'admin' │\n└─────────┴─────────┘\nCritical failure simulated</code></pre>"
   },
