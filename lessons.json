@@ -1,0 +1,622 @@
+[
+{
+"topic": "1. What is JavaScript? (Client-side vs Server-side)",
+"content": "JavaScript: 1. What is JavaScript?\n\nJavaScript is a high-level, JIT-compiled language conforming to the ECMAScript standard. Originally confined to client-side DOM manipulation, environments like Node.js now allow it to execute server-side.\n\nExample:\n<code class="language-javascript">const env = typeof window !== 'undefined' ? 'Client' : 'Server';\nconsole.log(Running on: ${env});\n\nOutput:\n<code class="language-bash">Running on: Server"
+},
+{
+"topic": "2. Adding JavaScript to HTML (Inline vs External scripts)",
+"content": "JavaScript: 2. Adding JavaScript to HTML\n\nJS can be embedded directly in HTML via inline <script> tags or linked externally using the src attribute. External scripts with the defer attribute are preferred for modern, non-blocking DOM parsing.\n\nExample:\n<code class="language-javascript">// In index.html\n// <script src="app.js" defer></script>\nconsole.log('External script loaded asynchronously');\n\nOutput:\n<code class="language-bash">External script loaded asynchronously"
+},
+{
+"topic": "3. The Developer Console (console.log and debugging)",
+"content": "JavaScript: 3. The Developer Console\n\nThe console object provides access to the browser's debugging console. Beyond console.log(), methods like table(), warn(), and error() help format complex debugging data.\n\nExample:\n<code class="language-javascript">const user = { id: 1, role: 'admin' };\nconsole.table(user);\nconsole.error('Critical failure simulated');\n\nOutput:\n<code class="language-bash">┌─────────┬─────────┐\n│ (index) │ Values  │\n├─────────┼─────────┤\n│ id      │ 1       │\n│ role    │ 'admin' │\n└─────────┴─────────┘\nCritical failure simulated"
+},
+{
+"topic": "4. JS Syntax Rules (Comments, statements, and semicolons)",
+"content": "JavaScript: 4. JS Syntax Rules\n\nJavaScript uses C-style syntax, executing statements sequentially. While Automatic Semicolon Insertion (ASI) often makes semicolons optional, omitting them can lead to edge-case bugs, especially before IIFEs or array destructuring.\n\nExample:\n<code class="language-javascript">const a = 1; // Explicit semicolon\nlet b = 2    // ASI handles this\nconsole.log(a + b);\n\nOutput:\n<code class="language-bash">3"
+},
+{
+"topic": "5. The V8 Engine: A brief intro to how JS runs",
+"content": "JavaScript: 5. The V8 Engine\n\nV8 is Google's open-source high-performance JS engine written in C++. It parses JavaScript, translates it to an Abstract Syntax Tree (AST), and uses Just-In-Time (JIT) compilation to convert it directly to fast machine code.\n\nExample:\n<code class="language-javascript">// V8 optimizes monomorphic functions heavily\nconst add = (a, b) => a + b;\nconsole.log(add(5, 10)); // JIT optimizes for Number inputs\n\nOutput:\n<code class="language-bash">15"
+},
+{
+"topic": "6. let vs const: When to use which",
+"content": "JavaScript: 6. let vs const\n\nDefault to const for variables to prevent reassignment and signal immutability of the reference. Use let strictly when you anticipate the variable's value changing, like loop counters.\n\nExample:\n<code class="language-javascript">const MAX_USERS = 100;\nlet currentUsers = 0;\ncurrentUsers++;\nconsole.log({ MAX_USERS, currentUsers });\n\nOutput:\n<code class="language-bash">{ MAX_USERS: 100, currentUsers: 1 }"
+},
+{
+"topic": "7. var and the dangers of Hoisting",
+"content": "JavaScript: 7. var and Hoisting\n\nVariables declared with var are function-scoped and hoisted to the top of their scope, initialized as undefined. This causes unpredictable behavior, which is why modern JS strictly uses let and const.\n\nExample:\n<code class="language-javascript">console.log(legacyVar); // undefined, not a ReferenceError\nvar legacyVar = 'danger';\n// let modernVar; would throw a ReferenceError if accessed early\n\nOutput:\n<code class="language-bash">undefined"
+},
+{
+"topic": "8. Block Scoping and the Temporal Dead Zone (TDZ)",
+"content": "JavaScript: 8. Block Scoping & TDZ\n\nlet and const are block-scoped (confined to {}). Accessing them before their declaration line throws a ReferenceError due to the Temporal Dead Zone (TDZ).\n\nExample:\n<code class="language-javascript">{\n  // TDZ starts\n  // console.log(safeVar); // Throws ReferenceError\n  const safeVar = 'active'; // TDZ ends\n  console.log(safeVar);\n}\n\nOutput:\n<code class="language-bash">active"
+},
+{
+"topic": "9. The Global Object (globalThis vs window)",
+"content": "JavaScript: 9. The Global Object\n\nHistorically, the global object was window in browsers and global in Node.js. ES2020 introduced globalThis, providing a standard, environment-agnostic reference to the global scope.\n\nExample:\n<code class="language-javascript">globalThis.customAppEnv = 'production';\nconsole.log(globalThis.customAppEnv);\nconsole.log(globalThis === window); // true in browser\n\nOutput:\n<code class="language-bash">production\ntrue"
+},
+{
+"topic": "10. Primitive Data Types Overview",
+"content": "JavaScript: 10. Primitive Data Types\n\nJavaScript has 7 primitive types: String, Number, BigInt, Boolean, Undefined, Null, and Symbol. Primitives are immutable and passed by value, meaning changes to one variable don't affect copied variables.\n\nExample:\n<code class="language-javascript">const isPrimitive = typeof 'hello' === 'string';\nconst empty = null;\nconsole.log(String? ${isPrimitive}, Null type? ${typeof empty});\n\nOutput:\n<code class="language-bash">String? true, Null type? object"
+},
+{
+"topic": "11. String Methods (slice, substring, replaceAll)",
+"content": "JavaScript: 11. String Methods\n\nStrings in JS have built-in methods for manipulation without altering the original string. slice() extracts sections, while modern additions like replaceAll() eliminate the need for global regex flags.\n\nExample:\n<code class="language-javascript">const text = "foo bar foo";\nconsole.log(text.slice(0, 3));\nconsole.log(text.replaceAll('foo', 'baz'));\n\nOutput:\n<code class="language-bash">foo\nbaz bar baz"
+},
+{
+"topic": "12. Template Literals and Tagged Templates",
+"content": "JavaScript: 12. Template Literals\n\nTemplate literals (using backticks) allow multi-line strings and string interpolation via ${}. Tagged templates allow you to parse template literals with a custom function for advanced formatting or escaping.\n\nExample:\n<code class="language-javascript">const tag = (strings, ...values) => strings[0] + values[0].toUpperCase();\nconst name = 'bob';\nconsole.log(tagHello ${name});\n\nOutput:\n<code class="language-bash">Hello BOB"
+},
+{
+"topic": "13. The Math Object and Number methods",
+"content": "JavaScript: 13. The Math Object\n\nThe Math object provides static properties and methods for mathematical constants and functions. Combined with Number methods like Number.isFinite(), it handles complex numeric operations safely.\n\nExample:\n<code class="language-javascript">const num = 12.56;\nconsole.log(Math.floor(num));\nconsole.log(Number.isInteger(num));\nconsole.log(Math.max(10, 20, 5));\n\nOutput:\n<code class="language-bash">12\nfalse\n20"
+},
+{
+"topic": "14. BigInt for arbitrarily large integers",
+"content": "JavaScript: 14. BigInt\n\nBigInt is a primitive that allows representation of integers larger than Number.MAX_SAFE_INTEGER (2^53 - 1). It is created by appending n to the end of an integer literal.\n\nExample:\n<code class="language-javascript">const maxSafe = Number.MAX_SAFE_INTEGER;\nconst massive = 9007199254740991n + 2n;\nconsole.log(massive);\nconsole.log(typeof massive);\n\nOutput:\n<code class="language-bash">9007199254740993n\nbigint"
+},
+{
+"topic": "15. Booleans and Truthy/Falsy Values",
+"content": "JavaScript: 15. Truthy/Falsy Values\n\nIn boolean contexts (like if statements), JS coerces values to Booleans. The falsy values are false, 0, -0, 0n, "", null, undefined, and NaN. Everything else is truthy.\n\nExample:\n<code class="language-javascript">const values = [0, "hello", [], null];\nconst truthyCheck = values.map(v => Boolean(v));\nconsole.log(truthyCheck);\n\nOutput:\n<code class="language-bash">[ false, true, true, false ]"
+},
+{
+"topic": "16. Null vs Undefined: The difference",
+"content": "JavaScript: 16. Null vs Undefined\n\nundefined means a variable has been declared but not assigned a value. null is an intentional assignment representing the absence of any object value. Use null to explicitly wipe a reference.\n\nExample:\n<code class="language-javascript">let a;\nlet b = null;\nconsole.log(a === undefined); // true\nconsole.log(typeof b); // 'object' (historical bug)\n\nOutput:\n<code class="language-bash">true\nobject"
+},
+{
+"topic": "17. Symbols and Unique Identifiers",
+"content": "JavaScript: 17. Symbols\n\nSymbol is a primitive type representing a completely unique identifier. Symbols are heavily used as hidden or non-colliding object keys, ensuring properties don't clash during iteration or inheritance.\n\nExample:\n<code class="language-javascript">const id = Symbol('id');\nconst user = { name: 'Alice', [id]: 123 };\nconsole.log(user[id]);\nconsole.log(Object.keys(user)); // Symbol key is hidden\n\nOutput:\n<code class="language-bash">123\n[ 'name' ]"
+},
+{
+"topic": "18. The typeof operator and its historical quirks",
+"content": "JavaScript: 18. The typeof operator\n\ntypeof returns a string indicating the type of the unevaluated operand. It has a notorious historical bug where typeof null === 'object'. Arrays also return 'object'; use Array.isArray() instead.\n\nExample:\n<code class="language-javascript">console.log(typeof 42);\nconsole.log(typeof null);\nconsole.log(typeof []);\nconsole.log(Array.isArray([]));\n\nOutput:\n<code class="language-bash">number\nobject\nobject\ntrue"
+},
+{
+"topic": "19. Explicit Type Casting (String, Number, Boolean)",
+"content": "JavaScript: 19. Explicit Type Casting\n\nTo explicitly convert data types, use the global constructors String(), Number(), and Boolean(). This is safer and more readable than relying on operators for coercion.\n\nExample:\n<code class="language-javascript">const strNum = "100.5";\nconsole.log(Number(strNum));\nconsole.log(String(404));\nconsole.log(Boolean(1));\n\nOutput:\n<code class="language-bash">100.5\n"404"\ntrue"
+},
+{
+"topic": "20. Implicit Type Coercion: How JavaScript guesses types",
+"content": "JavaScript: 20. Implicit Type Coercion\n\nJS automatically coerces types when applying operators to mismatched types. The + operator favors Strings (concatenation), while -, , and / favor Numbers (math calculations).\n\nExample:\n<code class="language-javascript">console.log('5' + 2);\nconsole.log('5' - 2);\nconsole.log('5' * '2');\n\nOutput:\n<code class="language-bash">52\n3\n10"
+},
+{
+"topic": "21. Arithmetic Operators and Modulo (%)",
+"content": "JavaScript: 21. Arithmetic Operators & Modulo\n\nStandard operators handle math operations, while the modulo operator % returns the remainder of division. Modulo is crucial for determining even/odd numbers or cyclical operations (like wrapping an array index).\n\nExample:\n<code class="language-javascript">console.log(10 % 3); // 10 / 3 = 9, remainder 1\nconst isEven = (num) => num % 2 === 0;\nconsole.log(isEven(4));\n\nOutput:\n<code class="language-bash">1\ntrue"
+},
+{
+"topic": "22. Unary Operators (++ , --, +, -)",
+"content": "JavaScript: 22. Unary Operators\n\nUnary operators work on a single operand. ++ and -- increment/decrement values (pre- or post-evaluation). The unary + is a fast, idiomatic way to implicitly cast a string to a number.\n\nExample:\n<code class="language-javascript">let count = 5;\nconsole.log(count++); // Post-increment: logs 5, then becomes 6\nconsole.log(++count); // Pre-increment: becomes 7, logs 7\nconsole.log(+'100' + 5); // Unary plus converts to Number\n\nOutput:\n<code class="language-bash">5\n7\n105"
+},
+{
+"topic": "23. Logical Operators (&&, ||, !)",
+"content": "JavaScript: 23. Logical Operators\n\nLogical operators evaluate boolean conditions. The NOT operator ! inverses truthiness. Using double NOT !! is a common shorthand to explicitly cast any value to a strict boolean primitive.\n\nExample:\n<code class="language-javascript">console.log(!true);\nconsole.log(!!"hello"); // Cast truthy string to boolean true\nconsole.log(!!0); // Cast falsy zero to boolean false\n\nOutput:\n<code class="language-bash">false\ntrue\nfalse"
+},
+{
+"topic": "24. Short-circuit Evaluation for conditional assignment",
+"content": "JavaScript: 24. Short-circuit Evaluation\n\n&& and || short-circuit. || returns the first truthy value it encounters, making it useful for default fallbacks. && returns the first falsy value, often used for conditional execution.\n\nExample:\n<code class="language-javascript">const config = null;\nconst fallback = config || 'default_setting';\n\nconst isValid = true;\nisValid && console.log('This executes because isValid is true');\n\nOutput:\n<code class="language-bash">This executes because isValid is true"
+},
+{
+"topic": "25. The Nullish Coalescing Operator (??)",
+"content": "JavaScript: 25. Nullish Coalescing (??)\n\nThe ?? operator returns the right-hand operand ONLY if the left-hand is null or undefined. Unlike ||, it safely allows falsy values like 0 or "" to be treated as valid inputs.\n\nExample:\n<code class="language-javascript">const count = 0;\nconsole.log(count || 10); // 10 (incorrectly overrides 0)\nconsole.log(count ?? 10); // 0 (correctly preserves 0)\n\nOutput:\n<code class="language-bash">10\n0"
+},
+{
+"topic": "26. Optional Chaining (?.) for safe object access",
+"content": "JavaScript: 26. Optional Chaining (?.)\n\nOptional chaining ?. allows you to read nested object properties without manually validating each reference in the chain. If a reference is nullish, the expression short-circuits to undefined instead of throwing an error.\n\nExample:\n<code class="language-javascript">const user = { profile: { name: 'Alice' } };\nconsole.log(user.profile?.name);\nconsole.log(user.settings?.theme); // Safe failure\n\nOutput:\n<code class="language-bash">Alice\nundefined"
+},
+{
+"topic": "27. Bitwise Operators: A brief overview",
+"content": "JavaScript: 27. Bitwise Operators\n\nBitwise operators (&, |, ^, ~, <<, >>) treat operands as 32-bit integers. They operate on binary representations directly, which is extremely fast for permissions matrices, flags, or graphics programming.\n\nExample:\n<code class="language-javascript">const READ = 1;  // 0001\nconst WRITE = 2; // 0010\nlet permissions = READ | WRITE; // 0011 (3)\nconsole.log((permissions & WRITE) === WRITE); // Check if has WRITE\n\nOutput:\n<code class="language-bash">true"
+},
+{
+"topic": "28. if/else and block scope",
+"content": "JavaScript: 28. if/else and block scope\n\nControl flow relies heavily on if/else statements. Variables declared with let or const inside an if block are entirely isolated to that block, preventing state leakage to the outer scope.\n\nExample:\n<code class="language-javascript">let status = 'idle';\nif (true) {\n  const status = 'active'; // Block scoped, masks outer status\n  console.log(status);\n}\nconsole.log(status);\n\nOutput:\n<code class="language-bash">active\nidle"
+},
+{
+"topic": "29. The Ternary Operator and ternary chains",
+"content": "JavaScript: 29. The Ternary Operator\n\nThe ternary operator condition ? exprIfTrue : exprIfFalse is a one-line shorthand for if/else. Ternary chains can replace complex switch blocks, though excessive chaining harms readability.\n\nExample:\n<code class="language-javascript">const age = 20;\nconst type = age < 13 ? 'child' \n           : age < 18 ? 'teen' \n           : 'adult';\nconsole.log(type);\n\nOutput:\n<code class="language-bash">adult"
+},
+{
+"topic": "30. The switch Statement and fall-through mechanics",
+"content": "JavaScript: 30. The switch Statement\n\nswitch evaluates an expression and matches strict equality (===) to case clauses. If a break is omitted, execution "falls through" to the next case, which can be useful for grouping identical logic.\n\nExample:\n<code class="language-javascript">const code = 'B';\nswitch (code) {\n  case 'A':\n  case 'B':\n    console.log('Valid Input'); // Fall-through used intentionally\n    break;\n  default:\n    console.log('Invalid');\n}\n\nOutput:\n<code class="language-bash">Valid Input"
+},
+{
+"topic": "31. try/catch/finally: Handling runtime errors",
+"content": "JavaScript: 31. try/catch/finally\n\ntry wraps code that might throw an exception. catch intercepts the error to prevent the app from crashing. finally always executes, making it perfect for cleanup tasks (like closing loaders).\n\nExample:\n<code class="language-javascript">try {\n  JSON.parse('invalid json');\n} catch (error) {\n  console.log('Caught parsing error');\n} finally {\n  console.log('Execution complete');\n}\n\nOutput:\n<code class="language-bash">Caught parsing error\nExecution complete"
+},
+{
+"topic": "32. Throwing custom Error objects",
+"content": "JavaScript: 32. Custom Error objects\n\nUse the throw keyword combined with the native Error constructor (or subclasses like TypeError) to halt execution and pass structured stack trace information to a parent catch block.\n\nExample:\n<code class="language-javascript">function divide(a, b) {\n  if (b === 0) throw new Error('Division by zero');\n  return a / b;\n}\ntry { divide(10, 0); } catch(e) { console.log(e.message); }\n\nOutput:\n<code class="language-bash">Division by zero"
+},
+{
+"topic": "33. The Date Object: Creation and formatting",
+"content": "JavaScript: 33. The Date Object\n\nThe Date object represents a single moment in time (milliseconds since the UNIX epoch). Modifying dates natively can be tricky, so extracting discrete components (like getFullYear) is the standard approach.\n\nExample:\n<code class="language-javascript">const now = new Date('2026-11-15T10:32:00Z');\nconsole.log(now.toISOString());\nconsole.log(now.getUTCFullYear());\n\nOutput:\n<code class="language-bash">2026-11-15T10:32:00.000Z\n2026"
+},
+{
+"topic": "34. The Intl API: Formatting currency and dates natively",
+"content": "JavaScript: 34. The Intl API\n\nThe Intl namespace provides robust, native internationalization capabilities without heavy external libraries. It perfectly handles locale-specific date rendering, number formatting, and currency.\n\nExample:\n<code class="language-javascript">const price = 1234.56;\nconst formatter = new Intl.NumberFormat('en-US', {\n  style: 'currency',\n  currency: 'USD'\n});\nconsole.log(formatter.format(price));\n\nOutput:\n<code class="language-bash">$1,234.56"
+},
+{
+"topic": "35. JSON: stringify() and parse() mechanics",
+"content": "JavaScript: 35. JSON parsing\n\nJSON.stringify() serializes JS objects into JSON strings, discarding functions and symbols. JSON.parse() reconstructs JS objects from JSON strings. Both are critical for network requests.\n\nExample:\n<code class="language-javascript">const data = { id: 1, action: 'test' };\nconst jsonStr = JSON.stringify(data);\nconsole.log(jsonStr);\nconsole.log(JSON.parse(jsonStr).action);\n\nOutput:\n<code class="language-bash">{"id":1,"action":"test"}\ntest"
+},
+{
+"topic": "36. Array Creation and the Array constructor",
+"content": "JavaScript: 36. Array Creation\n\nArrays are list-like objects. The literal syntax [] is preferred over the Array() constructor, as new Array(3) confusingly creates an empty array with length 3 instead of an array containing the number 3.\n\nExample:\n<code class="language-javascript">const literal = [3];\nconst constructed = new Array(3);\nconsole.log(literal.length); \nconsole.log(constructed.length);\n\nOutput:\n<code class="language-bash">1\n3"
+},
+{
+"topic": "37. Array Indexing and length manipulation",
+"content": "JavaScript: 37. Array Indexing\n\nArrays are zero-indexed. The length property is mutable; truncating an array's length permanently deletes elements beyond the new length boundary. To get the last element natively, use the new .at(-1) method.\n\nExample:\n<code class="language-javascript">const arr = ['a', 'b', 'c', 'd'];\narr.length = 2;\nconsole.log(arr);\nconsole.log(arr.at(-1));\n\nOutput:\n<code class="language-bash">[ 'a', 'b' ]\nb"
+},
+{
+"topic": "38. Mutating Array Methods: push, pop, shift, unshift",
+"content": "JavaScript: 38. Mutating Array Methods (Stack/Queue)\n\nThese methods mutate the original array in place. push/pop add/remove from the end (O(1) operations). shift/unshift add/remove from the beginning, requiring full index re-allocation (O(N) cost).\n\nExample:\n<code class="language-javascript">const queue = [2, 3];\nqueue.push(4);\nqueue.unshift(1);\nconsole.log(queue.pop());\nconsole.log(queue);\n\nOutput:\n<code class="language-bash">4\n[ 1, 2, 3 ]"
+},
+{
+"topic": "39. Mutating Array Methods: splice, reverse, sort",
+"content": "JavaScript: 39. splice, reverse, sort\n\nsplice() modifies an array by removing or replacing items at an index. sort() sorts in place but dangerously converts elements to strings by default unless a comparator function is provided.\n\nExample:\n<code class="language-javascript">const nums = [10, 2, 5];\nnums.sort((a, b) => a - b); // Ascending numeric sort\nnums.splice(1, 1, 99); // Replace index 1 with 99\nconsole.log(nums);\n\nOutput:\n<code class="language-bash">[ 2, 99, 10 ]"
+},
+{
+"topic": "40. Non-Mutating Array Methods: slice, concat, join",
+"content": "JavaScript: 40. Non-Mutating Array Methods\n\nFunctional programming prefers non-mutating methods. slice() creates a shallow copy of a portion of an array. concat() merges arrays, and join() collapses an array into a single string.\n\nExample:\n<code class="language-javascript">const arr1 = [1, 2];\nconst arr2 = arr1.concat([3]);\nconsole.log(arr1); // Unchanged\nconsole.log(arr2.join('-'));\n\nOutput:\n<code class="language-bash">[ 1, 2 ]\n1-2-3"
+},
+{
+"topic": "41. Multi-dimensional Arrays and flat()",
+"content": "JavaScript: 41. Multi-dimensional Arrays & flat()\n\nArrays can contain other arrays, forming matrices. The flat() method recursively flattens deeply nested arrays into a single-level array up to a specified depth.\n\nExample:\n<code class="language-javascript">const nested = [1, [2, [3, 4]]];\nconsole.log(nested.flat(1));\nconsole.log(nested.flat(2)); // or Infinity\n\nOutput:\n<code class="language-bash">[ 1, 2, [ 3, 4 ] ]\n[ 1, 2, 3, 4 ]"
+},
+{
+"topic": "42. Functional Iteration: forEach vs for...of",
+"content": "JavaScript: 42. forEach vs for...of\n\nforEach() iterates array elements via a callback function but cannot be broken out of (no break or return). for...of is a modern syntax loop that allows full control flow and works on any iterable.\n\nExample:\n<code class="language-javascript">const items = ['a', 'b', 'c'];\nfor (const item of items) {\n  if (item === 'b') break;\n  console.log(item);\n}\n\nOutput:\n<code class="language-bash">a"
+},
+{
+"topic": "43. Array .map(): Transforming data",
+"content": "JavaScript: 43. Array .map()\n\nmap() creates a new array populated with the results of calling a provided callback function on every element. It is the cornerstone of modern functional data transformation in JS and React.\n\nExample:\n<code class="language-javascript">const prices = [10, 20];\nconst withTax = prices.map(p => p * 1.2);\nconsole.log(withTax);\n\nOutput:\n<code class="language-bash">[ 12, 24 ]"
+},
+{
+"topic": "44. Array .filter(): Extracting subsets",
+"content": "JavaScript: 44. Array .filter()\n\nfilter() returns a new array containing all elements that pass the boolean test implemented by the provided callback function. It securely extracts subsets without mutating the source.\n\nExample:\n<code class="language-javascript">const ages = [12, 25, 17, 30];\nconst adults = ages.filter(age => age >= 18);\nconsole.log(adults);\n\nOutput:\n<code class="language-bash">[ 25, 30 ]"
+},
+{
+"topic": "45. Array .reduce(): Aggregating values",
+"content": "JavaScript: 45. Array .reduce()\n\nreduce() executes a reducer function on each array element, accumulating the results into a single output value (like a sum, or transforming an array into an object). Always provide an initial value.\n\nExample:\n<code class="language-javascript">const bills = [10, 20, 30];\nconst total = bills.reduce((acc, curr) => acc + curr, 0);\nconsole.log(total);\n\nOutput:\n<code class="language-bash">60"
+},
+{
+"topic": "46. Array .find() and .findIndex()",
+"content": "JavaScript: 46. .find() & .findIndex()\n\nfind() returns the first element in an array that satisfies a testing function, while findIndex() returns its index. Both short-circuit and stop iterating once a match is found.\n\nExample:\n<code class="language-javascript">const users = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];\nconst target = users.find(u => u.id === 2);\nconsole.log(target.name);\n\nOutput:\n<code class="language-bash">Bob"
+},
+{
+"topic": "47. Array .some() and .every()",
+"content": "JavaScript: 47. .some() & .every()\n\nsome() tests if AT LEAST ONE element passes a condition, returning a boolean. every() strictly checks if ALL elements pass the condition. Both short-circuit upon conclusion.\n\nExample:\n<code class="language-javascript">const checks = [true, true, false];\nconsole.log(checks.some(c => c === false));\nconsole.log(checks.every(c => c === true));\n\nOutput:\n<code class="language-bash">true\nfalse"
+},
+{
+"topic": "48. Object Creation and property access (dot vs bracket)",
+"content": "JavaScript: 48. Object Creation & Access\n\nObjects are key-value dictionaries. Dot notation is standard, but bracket notation obj['key'] is required when the key name is stored in a variable or contains spaces.\n\nExample:\n<code class="language-javascript">const user = { name: 'Dan', 'is-active': true };\nconst keyName = 'name';\nconsole.log(user[keyName]); // Dynamic bracket access\nconsole.log(user['is-active']); // Special character access\n\nOutput:\n<code class="language-bash">Dan\ntrue"
+},
+{
+"topic": "49. Object.keys(), Object.values(), and Object.entries()",
+"content": "JavaScript: 49. Iterating Object Properties\n\nSince objects aren't natively iterable via loops, we use Object.keys() to get an array of keys, Object.values() for values, and Object.entries() for key-value pairs (tuples).\n\nExample:\n<code class="language-javascript">const car = { make: 'Ford', year: 2020 };\nfor (const [key, value] of Object.entries(car)) {\n  console.log(${key}: ${value});\n}\n\nOutput:\n<code class="language-bash">make: Ford\nyear: 2020"
+},
+{
+"topic": "50. Object Property Descriptors (writable, enumerable, configurable)",
+"content": "JavaScript: 50. Object Property Descriptors\n\nEvery object property has underlying attributes configuring its behavior. Object.defineProperty() lets you define if a property can be modified (writable), looped over (enumerable), or deleted (configurable).\n\nExample:\n<code class="language-javascript">const obj = {};\nObject.defineProperty(obj, 'id', { value: 1, writable: false });\nobj.id = 99; // Fails silently, or throws in strict mode\nconsole.log(obj.id);\n\nOutput:\n<code class="language-bash">1"
+},
+{
+"topic": "51. Object.freeze() vs Object.seal()",
+"content": "JavaScript: 51. freeze() vs seal()\n\nObject.freeze() makes an object entirely immutable (no adding, removing, or changing properties). Object.seal() prevents adding or removing properties, but allows modifying existing ones.\n\nExample:\n<code class="language-javascript">const config = { theme: 'dark' };\nObject.seal(config);\nconfig.theme = 'light'; // Allowed\nconfig.newKey = true;   // Ignored\nconsole.log(config);\n\nOutput:\n<code class="language-bash">{ theme: 'light' }"
+},
+{
+"topic": "52. Shallow vs Deep Cloning (structuredClone)",
+"content": "JavaScript: 52. Shallow vs Deep Cloning\n\nUsing the spread operator { ...obj } creates a shallow copy, meaning nested objects share memory references. To deep clone an object safely, modern JS provides the native structuredClone() function.\n\nExample:\n<code class="language-javascript">const original = { data: { x: 1 } };\nconst clone = structuredClone(original);\nclone.data.x = 99;\nconsole.log(original.data.x); // Original remains isolated\n\nOutput:\n<code class="language-bash">1"
+},
+{
+"topic": "53. Array Destructuring and variable swapping",
+"content": "JavaScript: 53. Array Destructuring\n\nArray destructuring lets you neatly unpack values from arrays into distinct variables based on index position. It's also a brilliantly concise trick for swapping two variables without a temporary third variable.\n\nExample:\n<code class="language-javascript">let a = 1, b = 2;\n[a, b] = [b, a]; // Variable swap\nconsole.log(a: ${a}, b: ${b});\n\nconst [first, , third] = [10, 20, 30];\nconsole.log(third);\n\nOutput:\n<code class="language-bash">a: 2, b: 1\n30"
+},
+{
+"topic": "54. Object Destructuring and default values",
+"content": "JavaScript: 54. Object Destructuring\n\nObject destructuring maps properties into variables by key name rather than order. You can alias the extracted variable names and assign fallback default values if the property is undefined.\n\nExample:\n<code class="language-javascript">const settings = { speed: 50 };\nconst { speed: runSpeed, jump = 10 } = settings;\nconsole.log(Run: ${runSpeed}, Jump: ${jump});\n\nOutput:\n<code class="language-bash">Run: 50, Jump: 10"
+},
+{
+"topic": "55. The Spread Operator (...) for arrays and objects",
+"content": "JavaScript: 55. The Spread Operator (...)\n\nThe spread syntax unwraps iterables or object properties directly into a new structure. It's the most common ES6 method for shallow cloning, array concatenation, and merging objects.\n\nExample:\n<code class="language-javascript">const p1 = { x: 1 };\nconst p2 = { y: 2 };\nconst merged = { ...p1, ...p2, z: 3 };\nconsole.log(merged);\n\nOutput:\n<code class="language-bash">{ x: 1, y: 2, z: 3 }"
+},
+{
+"topic": "56. The Rest Parameter for variable arguments",
+"content": "JavaScript: 56. The Rest Parameter\n\nWhile structurally identical to the spread operator, the rest parameter (...args) works in reverse: it aggregates leftover arguments passed to a function into a true Array, replacing the legacy arguments object.\n\nExample:\n<code class="language-javascript">function sum(multiplier, ...numbers) {\n  return numbers.reduce((acc, curr) => acc + (curr * multiplier), 0);\n}\nconsole.log(sum(2, 10, 20)); // (102) + (202)\n\nOutput:\n<code class="language-bash">60"
+},
+{
+"topic": "57. The Map object: Iteration and non-string keys",
+"content": "JavaScript: 57. The Map object\n\nUnlike standard objects which only allow Strings or Symbols as keys, a Map is a collection that allows keys of ANY type (including objects or functions). Maps also maintain insertion order perfectly.\n\nExample:\n<code class="language-javascript">const cache = new Map();\nconst objKey = { ref: 1 };\ncache.set(objKey, 'cached data');\nconsole.log(cache.get(objKey));\nconsole.log(cache.size);\n\nOutput:\n<code class="language-bash">cached data\n1"
+},
+{
+"topic": "58. The Set object: Enforcing unique values",
+"content": "JavaScript: 58. The Set object\n\nA Set is a collection of entirely unique values. Adding a duplicate item is simply ignored. It's the fastest, most idiomatic way to deduplicate an array by converting it to a Set and back.\n\nExample:\n<code class="language-javascript">const duplicates = [1, 2, 2, 3, 1];\nconst unique = [...new Set(duplicates)];\nconsole.log(unique);\n\nOutput:\n<code class="language-bash">[ 1, 2, 3 ]"
+},
+{
+"topic": "59. WeakMap and WeakSet: Garbage collection benefits",
+"content": "JavaScript: 59. WeakMap & WeakSet\n\nWeakMap and WeakSet exclusively accept objects as keys/values and hold "weak" references to them. If no other references to the object exist, the memory is garbage-collected automatically, preventing memory leaks.\n\nExample:\n<code class="language-javascript">let domNode = { id: 'btn' };\nconst metadata = new WeakMap();\nmetadata.set(domNode, { clicks: 0 });\ndomNode = null; // metadata node is automatically garbage collected\n\nOutput:\n<code class="language-bash">Memory freed (No visible output)"
+},
+{
+"topic": "60. ArrayBuffer and raw binary data allocation",
+"content": "JavaScript: 60. ArrayBuffer\n\nAn ArrayBuffer represents a generic, fixed-length raw binary data buffer. You cannot manipulate it directly; you must create a TypedArray or a DataView to read and write its memory chunks.\n\nExample:\n<code class="language-javascript">// Allocate 4 bytes of memory\nconst buffer = new ArrayBuffer(4);\nconsole.log(Buffer byteLength: ${buffer.byteLength});\n\nOutput:\n<code class="language-bash">Buffer byteLength: 4"
+},
+{
+"topic": "61. TypedArrays (Int8Array, Float32Array)",
+"content": "JavaScript: 61. TypedArrays\n\nTypedArrays provide a view over an ArrayBuffer, locking elements to a specific numeric type (like 8-bit integers or 32-bit floats). They operate with C-like performance, crucial for WebGL and Audio processing.\n\nExample:\n<code class="language-javascript">const buffer = new ArrayBuffer(4);\nconst view = new Int32Array(buffer);\nview[0] = 123456;\nconsole.log(view[0]);\n\nOutput:\n<code class="language-bash">123456"
+},
+{
+"topic": "62. DataView: Reading and writing mixed binary data",
+"content": "JavaScript: 62. DataView\n\nUnlike TypedArrays which enforce a single data type, a DataView provides a low-level interface for reading and writing multiple different numeric types within the same ArrayBuffer at specific byte offsets.\n\nExample:\n<code class="language-javascript">const buffer = new ArrayBuffer(8);\nconst view = new DataView(buffer);\nview.setInt16(0, 256); // 16-bit at byte 0\nconsole.log(view.getInt16(0));\n\nOutput:\n<code class="language-bash">256"
+},
+{
+"topic": "63. Blob objects: Representing raw file data",
+"content": "JavaScript: 63. Blob objects\n\nA Blob (Binary Large Object) represents immutable, raw file-like data. They are commonly used to construct downloadable files on the client-side or wrap image data for uploading to an API.\n\nExample:\n<code class="language-javascript">const blob = new Blob(['Hello'], { type: 'text/html' });\nconsole.log(blob.size, blob.type);\n// URL.createObjectURL(blob) would create a downloadable link\n\nOutput:\n<code class="language-bash">14 'text/html'"
+},
+{
+"topic": "64. The File object and FileReader API",
+"content": "JavaScript: 64. File and FileReader\n\nThe File object inherits from Blob, adding metadata like a filename. The FileReader API asynchronously reads the contents of File/Blob objects, translating them to base64 strings or ArrayBuffers.\n\nExample:\n<code class="language-javascript">// Pseudo-example simulating a file input\nconst file = new File(['text'], 'doc.txt', { type: 'text/plain' });\nconst reader = new FileReader();\nreader.onload = (e) => console.log(e.target.result);\nreader.readAsText(file);\n\nOutput:\n<code class="language-bash">text"
+},
+{
+"topic": "65. Function Declarations vs Function Expressions",
+"content": "JavaScript: 65. Declarations vs Expressions\n\nFunction Declarations are fully hoisted, allowing invocation before they appear in code. Function Expressions (assigning a function to a variable) are NOT hoisted, adhering to linear execution logic.\n\nExample:\n<code class="language-javascript">console.log(hoisted()); // Works\nfunction hoisted() { return 'A'; }\n\n// notHoisted(); // Throws ReferenceError\nconst notHoisted = function() { return 'B'; };\n\nOutput:\n<code class="language-bash">A"
+},
+{
+"topic": "66. Arrow Functions: Syntax and implicit returns",
+"content": "JavaScript: 66. Arrow Functions\n\nArrow functions () => {} provide concise syntax. If the body is a single expression without braces, the result is implicitly returned. They lack their own this binding, inheriting it lexically.\n\nExample:\n<code class="language-javascript">const multiply = (a, b) => a * b; // Implicit return\nconsole.log(multiply(4, 5));\n\nOutput:\n<code class="language-bash">20"
+},
+{
+"topic": "67. Immediately Invoked Function Expressions (IIFEs)",
+"content": "JavaScript: 67. IIFEs\n\nAn IIFE is a function that runs the moment it is defined. Historically used to create private variable scopes before modules and let existed, they are now mainly used for executing top-level async code.\n\nExample:\n<code class="language-javascript">(() => {\n  const privateSetup = 'Configured';\n  console.log(privateSetup);\n})();\n\nOutput:\n<code class="language-bash">Configured"
+},
+{
+"topic": "68. The arguments object vs Rest parameters",
+"content": "JavaScript: 68. Arguments vs Rest\n\nThe legacy arguments object is an array-like object available inside non-arrow functions containing all passed parameters. Modern ES6 prefers the Rest parameter (...args) because it returns a true array with array methods.\n\nExample:\n<code class="language-javascript">function legacySum() {\n  return Array.from(arguments).reduce((a, b) => a + b, 0);\n}\nconsole.log(legacySum(5, 5, 5));\n\nOutput:\n<code class="language-bash">15"
+},
+{
+"topic": "69. Default Parameters in functions",
+"content": "JavaScript: 69. Default Parameters\n\nES6 allows default parameter values in function signatures. The default value is applied ONLY if the caller passes exactly undefined (passing null or 0 overrides the default).\n\nExample:\n<code class="language-javascript">function greet(name = 'Guest') {\n  console.log(Hello, ${name});\n}\ngreet();\ngreet(undefined);\ngreet('Alice');\n\nOutput:\n<code class="language-bash">Hello, Guest\nHello, Guest\nHello, Alice"
+},
+{
+"topic": "70. The Call Stack: How JavaScript tracks execution",
+"content": "JavaScript: 70. The Call Stack\n\nThe Call Stack is a LIFO (Last In, First Out) data structure the JS engine uses to track function execution. When a function finishes, it is popped off the stack. Excessive recursion causes a Stack Overflow.\n\nExample:\n<code class="language-javascript">function a() { return 'A'; }\nfunction b() { return a() + 'B'; }\nconsole.log(b()); // Stack pushes: global -> b -> a\n\nOutput:\n<code class="language-bash">AB"
+},
+{
+"topic": "71. The Execution Context and Variable Environments",
+"content": "JavaScript: 71. The Execution Context\n\nEvery time a function runs, an Execution Context is created, consisting of a Variable Environment (its local variables) and a reference to its outer lexical environment. This context is what powers scoping rules.\n\nExample:\n<code class="language-javascript">const globalEnv = 1;\nfunction contextTest() {\n  const localEnv = 2;\n  console.log(globalEnv + localEnv);\n}\ncontextTest();\n\nOutput:\n<code class="language-bash">3"
+},
+{
+"topic": "72. Lexical Scoping: How functions find variables",
+"content": "JavaScript: 72. Lexical Scoping\n\nLexical Scoping means inner functions have access to variables defined in their outer scope based on exactly where the function was structurally written in the source code, not where it is called from.\n\nExample:\n<code class="language-javascript">const msg = 'Lexical';\nfunction outer() {\n  function inner() { console.log(msg); }\n  inner();\n}\nouter();\n\nOutput:\n<code class="language-bash">Lexical"
+},
+{
+"topic": "73. Closures: Preserving state",
+"content": "JavaScript: 73. Closures\n\nA Closure occurs when a function "remembers" the variables in its lexical scope even after the outer function has returned. The inner function maintains a persistent link to that environment's memory.\n\nExample:\n<code class="language-javascript">function createCounter() {\n  let count = 0;\n  return () => ++count;\n}\nconst counter = createCounter();\nconsole.log(counter());\nconsole.log(counter());\n\nOutput:\n<code class="language-bash">1\n2"
+},
+{
+"topic": "74. Closures in practice: Data privacy and encapsulation",
+"content": "JavaScript: 74. Closures for Data Privacy\n\nBefore ES6 classes introduced private fields, closures were the standard way to achieve encapsulation. Variables scoped inside the outer function act as entirely private variables, manipulated only by the returned methods.\n\nExample:\n<code class="language-javascript">function createBank(initial) {\n  let balance = initial;\n  return { getBalance: () => balance };\n}\nconst myBank = createBank(100);\nconsole.log(myBank.balance); // undefined\nconsole.log(myBank.getBalance()); // 100\n\nOutput:\n<code class="language-bash">undefined\n100"
+},
+{
+"topic": "75. Closures in practice: Memoization",
+"content": "JavaScript: 75. Memoization\n\nMemoization is an optimization technique using closures to cache expensive function results. By storing previous inputs and outputs in a hidden closure object, repeated calls return the cached data instantly.\n\nExample:\n<code class="language-javascript">const memoize = (fn) => {\n  const cache = {};\n  return (n) => cache[n] || (cache[n] = fn(n));\n};\nconst fastSquare = memoize(x => x * x);\nconsole.log(fastSquare(5)); // Computed\nconsole.log(fastSquare(5)); // Cached\n\nOutput:\n<code class="language-bash">25\n25"
+},
+{
+"topic": "76. Identifying and fixing closure memory leaks",
+"content": "JavaScript: 76. Closure Memory Leaks\n\nBecause closures retain outer references indefinitely, attaching a closure to a long-lived object (like the DOM window) can prevent garbage collection of large datasets. Fix this by nullifying heavy variables when done.\n\nExample:\n<code class="language-javascript">function handler() {\n  let massiveData = new Array(1000).fill('leak');\n  return () => { massiveData = null; / Frees memory / };\n}\nconst cleanup = handler();\ncleanup();\n\nOutput:\n<code class="language-bash">Memory freed (No visible output)"
+},
+{
+"topic": "77. Pure Functions and side effects",
+"content": "JavaScript: 77. Pure Functions\n\nA Pure Function always yields the exact same output for the same input and causes zero "side effects" (it doesn't modify external state, network, or DOM). This makes them incredibly predictable and testable.\n\nExample:\n<code class="language-javascript">let state = 0;\n// Impure: mutates external state\nconst impureAdd = (val) => { state += val; return state; };\n// Pure: deterministic, no side effects\nconst pureAdd = (a, b) => a + b;\nconsole.log(pureAdd(2, 3));\n\nOutput:\n<code class="language-bash">5"
+},
+{
+"topic": "78. Higher-Order Functions: Functions returning functions",
+"content": "JavaScript: 78. Higher-Order Functions\n\nA Higher-Order Function (HOF) is any function that takes another function as an argument (like map or filter) OR returns a function. They allow abstracting behaviors rather than just values.\n\nExample:\n<code class="language-javascript">function withLogging(fn) {\n  return function(...args) {\n    console.log(Called with ${args});\n    return fn(...args);\n  }\n}\nconst loggedAdd = withLogging((a, b) => a + b);\nloggedAdd(2, 2);\n\nOutput:\n<code class="language-bash">Called with 2,2"
+},
+{
+"topic": "79. Currying and Partial Application",
+"content": "JavaScript: 79. Currying\n\nCurrying is transforming a function that takes multiple arguments into a sequence of functions that each take a single argument. It leverages closures to create specialized utility functions on the fly.\n\nExample:\n<code class="language-javascript">const multiply = (a) => (b) => a * b;\nconst double = multiply(2);\nconst triple = multiply(3);\nconsole.log(double(5));\nconsole.log(triple(5));\n\nOutput:\n<code class="language-bash">10\n15"
+},
+{
+"topic": "80. The this keyword: Default and implicit binding",
+"content": "JavaScript: 80. The this keyword\n\nIn JS, this resolves dynamically based on HOW a function is called, not where it is written. In implicit binding, this points to the object to the left of the dot calling the method.\n\nExample:\n<code class="language-javascript">const obj = {\n  id: 42,\n  printId() { console.log(this.id); }\n};\nobj.printId(); // Implicitly bound to obj\n\nOutput:\n<code class="language-bash">42"
+},
+{
+"topic": "81. Explicit binding: call() and apply()",
+"content": "JavaScript: 81. call() and apply()\n\nYou can override the default this context explicitly using call() or apply(). call takes arguments sequentially, while apply expects an array of arguments.\n\nExample:\n<code class="language-javascript">function greet(lang) {\n  console.log(${this.name} speaks ${lang});\n}\nconst user = { name: 'Alice' };\ngreet.call(user, 'French');\ngreet.apply(user, ['Spanish']);\n\nOutput:\n<code class="language-bash">Alice speaks French\nAlice speaks Spanish"
+},
+{
+"topic": "82. Hard binding: The bind() method",
+"content": "JavaScript: 82. The bind() method\n\nUnlike call or apply which execute the function immediately, bind() returns a NEW function permanently bound to the specified this context, protecting it from being overridden later.\n\nExample:\n<code class="language-javascript">const moduleObj = { x: 42, getX: function() { return this.x; } };\nconst unboundGetX = moduleObj.getX;\nconst boundGetX = unboundGetX.bind(moduleObj);\nconsole.log(unboundGetX()); // undefined\nconsole.log(boundGetX()); // 42\n\nOutput:\n<code class="language-bash">undefined\n42"
+},
+{
+"topic": "83. Arrow functions and lexical this",
+"content": "JavaScript: 83. Arrow functions & lexical this\n\nArrow functions do NOT have their own this binding. Instead, they lexically inherit this from their parent scope. This makes them perfect for callbacks inside class methods, but terrible for defining object methods.\n\nExample:\n<code class="language-javascript">const timer = {\n  name: 'Stopwatch',\n  run() {\n    setTimeout(() => console.log(this.name), 10);\n  }\n};\ntimer.run(); // Arrow function retains 'timer' context\n\nOutput:\n<code class="language-bash">Stopwatch"
+},
+{
+"topic": "84. The Prototype Chain and proto",
+"content": "JavaScript: 84. The Prototype Chain\n\nJavaScript objects inherit properties through a Prototype Chain. If a property isn't found on the object itself, JS traverses up to the object's hidden proto link until it hits null.\n\nExample:\n<code class="language-javascript">const arr = [];\nconsole.log(arr.proto === Array.prototype);\nconsole.log(arr.toString === Array.prototype.toString);\n// Inherits methods without declaring them directly\n\nOutput:\n<code class="language-bash">true\ntrue"
+},
+{
+"topic": "85. Constructor Functions and the new keyword",
+"content": "JavaScript: 85. Constructor Functions\n\nBefore classes, developers capitalized function names to denote Constructors. The new keyword creates an empty object, binds this to it, links its prototype, and returns the object automatically.\n\nExample:\n<code class="language-javascript">function Car(make) {\n  this.make = make;\n}\nconst myCar = new Car('Toyota');\nconsole.log(myCar.make);\n\nOutput:\n<code class="language-bash">Toyota"
+},
+{
+"topic": "86. Object.create() and pure prototypal inheritance",
+"content": "JavaScript: 86. Object.create()\n\nObject.create() is the purest form of inheritance. It creates a new object and strictly sets its prototype (proto) to the object passed in, avoiding constructor mechanics entirely.\n\nExample:\n<code class="language-javascript">const animalProto = { speak() { console.log('Noise'); } };\nconst dog = Object.create(animalProto);\ndog.speak();\n\nOutput:\n<code class="language-bash">Noise"
+},
+{
+"topic": "87. ES6 Classes: Syntactic sugar for prototypes",
+"content": "JavaScript: 87. ES6 Classes\n\nES6 class syntax is purely "syntactic sugar" over JavaScript's existing prototype-based inheritance. It provides a cleaner, more traditional object-oriented pattern, but functions exactly like constructor prototypes under the hood.\n\nExample:\n<code class="language-javascript">class User {\n  constructor(name) { this.name = name; }\n  getName() { return this.name; }\n}\nconsole.log(typeof User); // Under the hood, it's just a function\n\nOutput:\n<code class="language-bash">function"
+},
+{
+"topic": "88. Class Constructors and Instantiation",
+"content": "JavaScript: 88. Class Instantiation\n\nThe constructor method is a special function inside a class that runs automatically when initialized via new. It sets up the starting state of the specific instance being created.\n\nExample:\n<code class="language-javascript">class Item {\n  constructor(price) {\n    this.price = price;\n  }\n}\nconst hat = new Item(20);\nconsole.log(hat.price);\n\nOutput:\n<code class="language-bash">20"
+},
+{
+"topic": "89. Class Inheritance using extends and super",
+"content": "JavaScript: 89. Class Inheritance\n\nUse extends to create a child class that inherits from a parent. You MUST call super() inside the child's constructor before accessing this; it calls the parent's constructor logic.\n\nExample:\n<code class="language-javascript">class Animal { constructor(name) { this.name = name; } }\nclass Dog extends Animal {\n  constructor(name, breed) {\n    super(name);\n    this.breed = breed;\n  }\n}\nconsole.log(new Dog('Rex', 'Pug').name);\n\nOutput:\n<code class="language-bash">Rex"
+},
+{
+"topic": "90. Static Properties and Methods in Classes",
+"content": "JavaScript: 90. Static Class Properties\n\nThe static keyword attaches a method or property directly to the Class itself, NOT to instantiated objects. Static methods are commonly used for utility functions or creating instances.\n\nExample:\n<code class="language-javascript">class MathUtil {\n  static add(a, b) { return a + b; }\n}\n// Called on the class, not an instance\nconsole.log(MathUtil.add(10, 5));\n\nOutput:\n<code class="language-bash">15"
+},
+{
+"topic": "91. Private Class Fields (#) and Encapsulation",
+"content": "JavaScript: 91. Private Class Fields\n\nModern JS allows true private variables inside classes by prefixing properties with a hash #. Any attempt to read or modify a private field outside the class body throws a strict SyntaxError.\n\nExample:\n<code class="language-javascript">class BankAccount {\n  #balance = 0;\n  deposit(amount) { this.#balance += amount; }\n  getBalance() { return this.#balance; }\n}\nconst acc = new BankAccount();\nacc.deposit(50);\nconsole.log(acc.getBalance()); // acc.#balance would throw\n\nOutput:\n<code class="language-bash">50"
+},
+{
+"topic": "92. Getters and Setters inside Classes",
+"content": "JavaScript: 92. Getters and Setters\n\nget and set keywords define accessor methods that look and act like normal properties. They are vital for intercepting assignments to validate data or triggering reactions when properties update.\n\nExample:\n<code class="language-javascript">class User {\n  constructor() { this._age = 0; }\n  set age(value) {\n    if (value < 0) throw new Error('Invalid age');\n    this._age = value;\n  }\n  get age() { return this._age; }\n}\nconst u = new User();\nu.age = 25;\nconsole.log(u.age);\n\nOutput:\n<code class="language-bash">25"
+},
+{
+"topic": "93. Implementing the Singleton Pattern in JS",
+"content": "JavaScript: 93. The Singleton Pattern\n\nThe Singleton pattern guarantees a class only ever has ONE instance globally. In JS, this is easily achieved using a static property that saves the instance and returns it on subsequent constructor calls.\n\nExample:\n<code class="language-javascript">class DBConnection {\n  constructor() {\n    if (DBConnection.instance) return DBConnection.instance;\n    DBConnection.instance = this;\n    this.connected = true;\n  }\n}\nconsole.log(new DBConnection() === new DBConnection());\n\nOutput:\n<code class="language-bash">true"
+},
+{
+"topic": "94. Implementing the Factory Pattern in JS",
+"content": "JavaScript: 94. The Factory Pattern\n\nA Factory abstracts the creation of objects away from specific class instantiations. Instead of using new directly throughout your codebase, a central factory function returns configured objects based on input types.\n\nExample:\n<code class="language-javascript">class Car { log() { return 'Car'; } }\nclass Truck { log() { return 'Truck'; } }\nclass VehicleFactory {\n  static create(type) {\n    return type === 'car' ? new Car() : new Truck();\n  }\n}\nconsole.log(VehicleFactory.create('car').log());\n\nOutput:\n<code class="language-bash">Car"
+},
+{
+"topic": "95. Implementing the Observer Pattern in JS",
+"content": "JavaScript: 95. The Observer Pattern\n\nThe Observer pattern forms the basis of event-driven programming. A 'Subject' maintains a list of 'Observers' (callbacks) and broadcasts data to all of them whenever its internal state changes.\n\nExample:\n<code class="language-javascript">class Subject {\n  constructor() { this.observers = []; }\n  subscribe(fn) { this.observers.push(fn); }\n  fire(data) { this.observers.forEach(fn => fn(data)); }\n}\nconst news = new Subject();\nnews.subscribe(msg => console.log('User 1 read: ' + msg));\nnews.fire('Breaking News!');\n\nOutput:\n<code class="language-bash">User 1 read: Breaking News!"
+},
+{
+"topic": "96. JavaScript Modules (ESM): import and export",
+"content": "JavaScript: 96. ESM Modules\n\nES Modules structurally encapsulate code into distinct files. Use export to expose variables or functions, and import to consume them. It promotes code reuse and statically analyzable dependency trees (tree-shaking).\n\nExample:\n<code class="language-javascript">// math.js\n// export const PI = 3.14;\n\n// app.js\n// import { PI } from './math.js';\nconsole.log('Modules prevent global namespace pollution');\n\nOutput:\n<code class="language-bash">Modules prevent global namespace pollution"
+},
+{
+"topic": "97. Dynamic Imports for code splitting",
+"content": "JavaScript: 97. Dynamic Imports\n\nStandard imports execute synchronously on load. Dynamic imports import() return a Promise and load modules asynchronously during runtime. This is the cornerstone of lazy-loading and code splitting in frameworks like React.\n\nExample:\n<code class="language-javascript">// Evaluated conditionally at runtime\nconst loadAnalytics = async () => {\n  // const module = await import('./analytics.js');\n  // module.trackView();\n  console.log('Lazy loaded successfully');\n};\nloadAnalytics();\n\nOutput:\n<code class="language-bash">Lazy loaded successfully"
+},
+{
+"topic": "98. Well-Known Symbols (Symbol.iterator, Symbol.toPrimitive)",
+"content": "JavaScript: 98. Well-Known Symbols\n\nWell-known symbols alter deep, native language behaviors. Defining a [Symbol.iterator] property transforms a custom object into an iterable (usable with for...of). [Symbol.toPrimitive] dictates how an object converts to a primitive.\n\nExample:\n<code class="language-javascript">const range = {\n  [Symbol.iterator]: function () { yield 1; yield 2; }\n};\nconsole.log([...range]); // Object is now cleanly spreadable\n\nOutput:\n<code class="language-bash">[ 1, 2 ]"
+},
+{
+"topic": "99. Proxy Objects: Intercepting object operations",
+"content": "JavaScript: 99. Proxy Objects\n\nA Proxy wraps a target object and intercepts fundamental language operations (like reading, assigning, or deleting properties) to inject custom logic. Vue 3's reactive system is powered entirely by Proxies.\n\nExample:\n<code class="language-javascript">const target = { msg: 'hello' };\nconst proxy = new Proxy(target, {\n  get: (obj, prop) => prop in obj ? obj[prop] : 'Not Found'\n});\nconsole.log(proxy.msg);\nconsole.log(proxy.missingKey);\n\nOutput:\n<code class="language-bash">hello\nNot Found"
+},
+{
+"topic": "100. Proxy Traps: get, set, and validation",
+"content": "JavaScript: 100. Proxy validation\n\nProxy "traps" like set can enforce strict data validation silently before the target object is modified, effectively acting as an automated gatekeeper for state changes.\n\nExample:\n<code class="language-javascript">const validator = new Proxy({}, {\n  set(obj, prop, value) {\n    if (prop === 'age' && value < 18) throw 'Too young';\n    obj[prop] = value;\n    return true;\n  }\n});\nvalidator.age = 20;\nconsole.log(validator.age); // validator.age = 15 would throw\n\nOutput:\n<code class="language-bash">20"
+},
+{
+"topic": "101. The Reflect API: Meta-programming safely",
+"content": "JavaScript: 101. The Reflect API\n\nThe Reflect object provides static methods directly mirroring Proxy traps. When writing a Proxy interceptor, calling Reflect.get or Reflect.set is the safest way to execute the default, expected behavior on the target object.\n\nExample:\n<code class="language-javascript">const p = new Proxy({ a: 1 }, {\n  get(target, prop, receiver) {\n    console.log(Accessing ${prop});\n    return Reflect.get(target, prop, receiver);\n  }\n});\nconsole.log(p.a);\n\nOutput:\n<code class="language-bash">Accessing a\n1"
+},
+{
+"topic": "102. The Event Loop and single-threaded execution",
+"content": "JavaScript: 102. The Event Loop\n\nJS is purely single-threaded. The Event Loop monitors the Call Stack and the Task Queues. If the Call Stack is empty, it pushes the next pending asynchronous callback onto the stack, allowing non-blocking I/O.\n\nExample:\n<code class="language-javascript">console.log('1. Start');\nsetTimeout(() => console.log('3. Timeout'), 0);\nconsole.log('2. End');\n\nOutput:\n<code class="language-bash">1. Start\n2. End\n3. Timeout"
+},
+{
+"topic": "103. Macrotasks (Task Queue) vs Microtasks",
+"content": "JavaScript: 103. Microtasks vs Macrotasks\n\nPromises run in the Microtask queue, which has absolute priority over the Macrotask queue (setTimeout, DOM events). After a synchronous execution completes, the Event Loop empties ALL Microtasks before handling a single Macrotask.\n\nExample:\n<code class="language-javascript">setTimeout(() => console.log('Macrotask (Timeout)'), 0);\nPromise.resolve().then(() => console.log('Microtask (Promise)'));\nconsole.log('Sync');\n\nOutput:\n<code class="language-bash">Sync\nMicrotask (Promise)\nMacrotask (Timeout)"
+},
+{
+"topic": "104. Callbacks and Inversion of Control",
+"content": "JavaScript: 104. Callbacks\n\nA callback is a function passed as an argument, executed later. Heavy nesting leads to "Callback Hell." More critically, passing a callback hands control of your program to a third-party function (Inversion of Control).\n\nExample:\n<code class="language-javascript">function fetchData(callback) {\n  setTimeout(() => callback('Data loaded'), 10);\n}\nfetchData(res => console.log(res));\n\nOutput:\n<code class="language-bash">Data loaded"
+},
+{
+"topic": "105. Promises: Pending, Fulfilled, and Rejected states",
+"content": "JavaScript: 105. Promises states\n\nA Promise is an object representing the eventual completion of an async operation. It exists in one of three mutually exclusive states: Pending, Fulfilled (success), or Rejected (error). Once settled, state cannot change.\n\nExample:\n<code class="language-javascript">const resolvedPromise = Promise.resolve('Success');\nconsole.log(resolvedPromise);\n// State logs instantly as fulfilled in environments that sync display\n\nOutput:\n<code class="language-bash">Promise { 'Success' }"
+},
+{
+"topic": "106. Creating new Promises from scratch",
+"content": "JavaScript: 106. Constructing Promises\n\nYou wrap legacy callback APIs in Promises by invoking the new Promise(executor) constructor. The executor receives resolve and reject arguments to signal when the underlying asynchronous task concludes.\n\nExample:\n<code class="language-javascript">const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));\nwait(10).then(() => console.log('Timer done'));\n\nOutput:\n<code class="language-bash">Timer done"
+},
+{
+"topic": "107. Chaining Promises with .then() and .catch()",
+"content": "JavaScript: 107. Promise Chaining\n\nEvery .then() returns a completely new Promise, allowing for clean, linear chaining. A single .catch() at the end of the chain securely intercepts any rejection that occurred anywhere upstream.\n\nExample:\n<code class="language-javascript">Promise.resolve(2)\n  .then(val => val * 2)\n  .then(val => { throw new Error('Failed at ' + val); })\n  .catch(err => console.log(err.message));\n\nOutput:\n<code class="language-bash">Failed at 4"
+},
+{
+"topic": "108. The .finally() method for cleanup",
+"content": "JavaScript: 108. The .finally() method\n\nThe .finally() block executes after a Promise settles, regardless of whether it was Fulfilled or Rejected. It is the gold standard for global cleanup operations, like hiding a UI loading spinner.\n\nExample:\n<code class="language-javascript">let isLoading = true;\nPromise.reject('Network Error')\n  .catch(console.log)\n  .finally(() => { \n    isLoading = false; \n    console.log(Loading state: ${isLoading}); \n  });\n\nOutput:\n<code class="language-bash">Network Error\nLoading state: false"
+},
+{
+"topic": "109. Promise.all() for parallel execution",
+"content": "JavaScript: 109. Promise.all()\n\nPromise.all() receives an array of Promises and executes them concurrently. It resolves with an array of all results. However, it fails fast: if a single Promise rejects, the entire operation instantly rejects.\n\nExample:\n<code class="language-javascript">const p1 = Promise.resolve(10);\nconst p2 = Promise.resolve(20);\nPromise.all([p1, p2]).then(results => console.log(results));\n\nOutput:\n<code class="language-bash">[ 10, 20 ]"
+},
+{
+"topic": "110. Promise.race() and Promise.any()",
+"content": "JavaScript: 110. race() vs any()\n\nPromise.race() resolves or rejects as soon as the FIRST promise in the array settles. Promise.any() ignores rejections and returns the first successfully Fulfilled promise (useful for pinging multiple redundant servers).\n\nExample:\n<code class="language-javascript">const slow = new Promise(r => setTimeout(r, 50, 'Slow'));\nconst fast = Promise.resolve('Fast');\nPromise.race([slow, fast]).then(console.log);\n\nOutput:\n<code class="language-bash">Fast"
+},
+{
+"topic": "111. Promise.allSettled() for resilient asynchronous operations",
+"content": "JavaScript: 111. Promise.allSettled()\n\nUnlike Promise.all() which short-circuits on a single error, Promise.allSettled() waits for ALL promises to complete, returning an array of objects detailing the status (fulfilled/rejected) and value/reason for each.\n\nExample:\n<code class="language-javascript">const arr = [Promise.resolve('OK'), Promise.reject('ERR')];\nPromise.allSettled(arr).then(res => console.log(res.map(r => r.status)));\n\nOutput:\n<code class="language-bash">[ 'fulfilled', 'rejected' ]"
+},
+{
+"topic": "112. Async/Await syntax and execution pausing",
+"content": "JavaScript: 112. Async/Await\n\nThe await keyword can only be used inside an async function. It syntactically halts the execution of that specific function until the awaited Promise settles, allowing asynchronous code to read like synchronous code.\n\nExample:\n<code class="language-javascript">async function fetchSim() {\n  const data = await Promise.resolve('Mock Data');\n  console.log(data);\n}\nfetchSim();\n\nOutput:\n<code class="language-bash">Mock Data"
+},
+{
+"topic": "113. Handling errors in Async/Await with try/catch",
+"content": "JavaScript: 113. Errors in Async/Await\n\nBecause await unwraps a Promise directly, Promise rejections are thrown as actual exceptions. Wrapping await calls in traditional try/catch blocks is the standard methodology for handling these errors gracefully.\n\nExample:\n<code class="language-javascript">async function load() {\n  try {\n    await Promise.reject('404 Not Found');\n  } catch (error) {\n    console.log(Caught: ${error});\n  }\n}\nload();\n\nOutput:\n<code class="language-bash">Caught: 404 Not Found"
+},
+{
+"topic": "114. Sequential vs Parallel execution in Async/Await",
+"content": "JavaScript: 114. Sequential vs Parallel\n\nAwaiting promises back-to-back causes a sequential waterfall (slow). To execute tasks in parallel while using async/await, initiate all promises first, then wrap them in await Promise.all().\n\nExample:\n<code class="language-javascript">async function fastProcess() {\n  const p1 = Promise.resolve('A');\n  const p2 = Promise.resolve('B');\n  const [res1, res2] = await Promise.all([p1, p2]);\n  console.log(res1, res2);\n}\nfastProcess();\n\nOutput:\n<code class="language-bash">A B"
+},
+{
+"topic": "115. Iterators: The next() method",
+"content": "JavaScript: 115. Iterators\n\nAn iterator is an object with a next() method returning { value, done }. This protocol powers all for...of loops and spread syntax. You can consume values manually by invoking next() until done is true.\n\nExample:\n<code class="language-javascript">const iterator = [10, 20]Symbol.iterator;\nconsole.log(iterator.next().value);\nconsole.log(iterator.next().value);\nconsole.log(iterator.next().done);\n\nOutput:\n<code class="language-bash">10\n20\ntrue"
+},
+{
+"topic": "116. Generators (function*) and the yield keyword",
+"content": "JavaScript: 116. Generators\n\nDeclared with function*, generators can pause their own execution via yield and resume later. They automatically act as custom Iterators and are exceptional at managing infinite sequences or custom state machines.\n\nExample:\n<code class="language-javascript">function* counter() {\n  let i = 0;\n  while (true) yield i++;\n}\nconst gen = counter();\nconsole.log(gen.next().value); // 0\nconsole.log(gen.next().value); // 1\n\nOutput:\n<code class="language-bash">0\n1"
+},
+{
+"topic": "117. Async Generators and the for await...of loop",
+"content": "JavaScript: 117. Async Generators\n\nAsync generators combine async and function* to yield Promises. The ES2018 for await...of loop smoothly iterates over these streams of asynchronous data, automatically resolving each chunk as it arrives.\n\nExample:\n<code class="language-javascript">async function* streamData() {\n  yield await Promise.resolve('Chunk 1');\n  yield await Promise.resolve('Chunk 2');\n}\n(async () => {\n  for await (const chunk of streamData()) console.log(chunk);\n})();\n\nOutput:\n<code class="language-bash">Chunk 1\nChunk 2"
+},
+{
+"topic": "118. setTimeout and setInterval mechanics",
+"content": "JavaScript: 118. Timers\n\nsetTimeout executes a callback once after a delay, while setInterval loops endlessly. Both push tasks to the Macrotask queue. The specified time is a MINIMUM delay, not a guarantee, depending on main thread blockage.\n\nExample:\n<code class="language-javascript">const id = setTimeout(() => console.log('Never runs'), 1000);\nclearTimeout(id); // Cancels the timer before it fires\nconsole.log('Timer cleared');\n\nOutput:\n<code class="language-bash">Timer cleared"
+},
+{
+"topic": "119. requestAnimationFrame for smooth animations",
+"content": "JavaScript: 119. requestAnimationFrame\n\nInstead of jittery setInterval animations, requestAnimationFrame (rAF) aligns callback execution strictly with the browser's display refresh rate (usually 60fps), drastically improving performance and battery life.\n\nExample:\n<code class="language-javascript">// Browser API simulated output\nlet frames = 0;\nfunction animate() {\n  frames++;\n  // if (frames < 60) requestAnimationFrame(animate);\n}\nanimate();\nconsole.log('Animation frame requested');\n\nOutput:\n<code class="language-bash">Animation frame requested"
+},
+{
+"topic": "120. Debouncing user input events",
+"content": "JavaScript: 120. Debouncing\n\nDebouncing forces a function to wait a certain amount of time before running. If the event fires again before the timer ends, the timer resets. It's critical for search bars and window resizing to prevent API spam.\n\nExample:\n<code class="language-javascript">const debounce = (fn, ms) => {\n  let timer;\n  return (...args) => {\n    clearTimeout(timer);\n    timer = setTimeout(() => fn(...args), ms);\n  };\n};\nconst search = debounce(() => console.log('Searching API...'), 100);\nsearch(); search(); search(); // Only logs once after 100ms\n\nOutput:\n<code class="language-bash">Searching API..."
+},
+{
+"topic": "121. Throttling frequent event listeners",
+"content": "JavaScript: 121. Throttling\n\nWhile debouncing waits for a pause in events, Throttling guarantees execution at a steady, predefined rate (e.g., exactly once every 100ms). It's the standard optimization for scroll and mousemove listeners.\n\nExample:\n<code class="language-javascript">const throttle = (fn, limit) => {\n  let inThrottle;\n  return function() {\n    if (!inThrottle) { fn(); inThrottle = true; setTimeout(() => inThrottle = false, limit); }\n  }\n}\n// throttle(scrollHandler, 200) limits execution to 5 times per second.\n\nOutput:\n<code class="language-bash">Function throttled"
+},
+{
+"topic": "122. The DOM Tree: Nodes vs Elements",
+"content": "JavaScript: 122. Nodes vs Elements\n\nThe DOM (Document Object Model) maps HTML tags to JS objects. While all HTML tags are Elements, the DOM tree also includes Text Nodes (whitespace/text) and Comment Nodes. Methods like children return only Elements, ignoring raw text nodes.\n\nExample:\n<code class="language-javascript">// If document.body has 1 div and whitespace\n// console.log(document.body.childNodes.length); // e.g., 3 (Nodes)\n// console.log(document.body.children.length);   // 1 (Elements)\n\nOutput:\n<code class="language-bash">DOM conceptually mapped"
+},
+{
+"topic": "123. Selecting Elements: querySelector and getElementById",
+"content": "JavaScript: 123. Selecting Elements\n\ngetElementById is highly optimized and fast. However, querySelector (and querySelectorAll) is the modern standard, allowing you to fetch DOM elements using complex, standard CSS selector strings.\n\nExample:\n<code class="language-javascript">// const btn = document.querySelector('.btn-primary[data-active="true"]');\n// console.log(btn);\nconsole.log('Selected element matching CSS rules');\n\nOutput:\n<code class="language-bash">Selected element matching CSS rules"
+},
+{
+"topic": "124. Creating and Appending DOM Elements",
+"content": "JavaScript: 124. Creating & Appending DOM\n\nUse document.createElement() to build detached nodes in memory. Modifying them offline is fast. You then inject them into the live DOM tree using modern methods like append() or prepend().\n\nExample:\n<code class="language-javascript">// const div = document.createElement('div');\n// div.textContent = 'Hello World';\n// document.body.append(div);\nconsole.log('Appended div to DOM');\n\nOutput:\n<code class="language-bash">Appended div to DOM"
+},
+{
+"topic": "125. Removing Elements and replacing nodes",
+"content": "JavaScript: 125. Removing Elements\n\nHistorically, removing an element required referencing its parent (parent.removeChild(child)). Modern browsers support the child.remove() method directly, simplifying element destruction.\n\nExample:\n<code class="language-javascript">// const modal = document.querySelector('.modal');\n// if (modal) modal.remove();\nconsole.log('Modal element completely removed from DOM tree');\n\nOutput:\n<code class="language-bash">Modal element completely removed from DOM tree"
+},
+{
+"topic": "126. DocumentFragment for batched DOM updates",
+"content": "JavaScript: 126. DocumentFragment\n\nInjecting thousands of elements directly into the live DOM causes severe layout thrashing (reflows). A DocumentFragment is a lightweight, invisible DOM node. You append children to it in memory, then append the fragment once to the live DOM.\n\nExample:\n<code class="language-javascript">// const frag = document.createDocumentFragment();\n// for (let i = 0; i < 1000; i++) frag.append(document.createElement('li'));\n// ul.append(frag); // Triggers exactly ONE reflow\nconsole.log('Batched DOM update complete');\n\nOutput:\n<code class="language-bash">Batched DOM update complete"
+},
+{
+"topic": "127. Event Propagation: Bubbling and Capturing",
+"content": "JavaScript: 127. Bubbling and Capturing\n\nEvents flow in two phases. In Capturing, the event travels DOWN from the Window to the target. In Bubbling (default behavior), it travels UP from the target back to the Window, triggering listeners on ancestors along the way.\n\nExample:\n<code class="language-javascript">// parent.addEventListener('click', () => console.log('Parent Bubble'));\n// child.addEventListener('click', () => console.log('Child Click'));\nconsole.log('Child Click\nParent Bubble');\n\nOutput:\n<code class="language-bash">Child Click\nParent Bubble"
+},
+{
+"topic": "128. stopPropagation() vs preventDefault()",
+"content": "JavaScript: 128. stopPropagation vs preventDefault\n\npreventDefault() stops the browser's native action (like following a link or submitting a form). stopPropagation() stops the event from bubbling up the DOM tree to parent listeners, effectively isolating the click.\n\nExample:\n<code class="language-javascript">// link.addEventListener('click', (e) => {\n//   e.preventDefault(); // Prevents page redirect\n//   e.stopPropagation(); // Parent won't know link was clicked\n// });\nconsole.log('Custom logic executed, default aborted');\n\nOutput:\n<code class="language-bash">Custom logic executed, default aborted"
+},
+{
+"topic": "129. Event Delegation for dynamic elements",
+"content": "JavaScript: 129. Event Delegation\n\nInstead of attaching listeners to 1,000 dynamic list items, attach ONE listener to the parent ul. Use the bubbling e.target to detect which specific child was clicked. It saves massive amounts of memory.\n\nExample:\n<code class="language-javascript">// ul.addEventListener('click', (e) => {\n//   if (e.target.matches('li.item')) console.log('List item clicked!');\n// });\nconsole.log('Delegated event processed successfully');\n\nOutput:\n<code class="language-bash">Delegated event processed successfully"
+},
+{
+"topic": "130. Creating and dispatching CustomEvent objects",
+"content": "JavaScript: 130. CustomEvent objects\n\nYou can trigger synthetic, programmatic events in the browser using the CustomEvent constructor. By passing a detail object, you can broadcast structured payload data seamlessly across disjointed UI components.\n\nExample:\n<code class="language-javascript">// const evt = new CustomEvent('authSuccess', { detail: { userId: 1 } });\n// window.dispatchEvent(evt);\nconsole.log('Custom event authSuccess dispatched');\n\nOutput:\n<code class="language-bash">Custom event authSuccess dispatched"
+},
+{
+"topic": "131. The Constraint Validation API for forms",
+"content": "JavaScript: 131. Constraint Validation API\n\nBrowsers have powerful native form validation. Rather than writing manual regex, use the DOM's built-in checkValidity() method on form elements to enforce HTML attributes like required or pattern natively.\n\nExample:\n<code class="language-javascript">// const emailInput = document.querySelector('input[type=email]');\n// if (!emailInput.checkValidity()) {\n//   console.log(emailInput.validationMessage);\n// }\nconsole.log('Please enter a valid email address.');\n\nOutput:\n<code class="language-bash">Please enter a valid email address."
+},
+{
+"topic": "132. FormData objects for easy form submission",
+"content": "JavaScript: 132. FormData objects\n\nManually extracting input values is tedious. The FormData object consumes an entire HTML form and instantly serializes all inputs (with name attributes) into key-value pairs ready for a Fetch POST request.\n\nExample:\n<code class="language-javascript">// form.addEventListener('submit', (e) => {\n//   e.preventDefault();\n//   const data = new FormData(e.target);\n//   console.log(Object.fromEntries(data));\n// });\nconsole.log('{ username: "bob", age: "25" }');\n\nOutput:\n<code class="language-bash">{ username: "bob", age: "25" }"
+},
+{
+"topic": "133. Manipulating inline styles and CSS classes (classList)",
+"content": "JavaScript: 133. Styles and classList\n\nDirectly altering inline styles (el.style.color) is rigid and hard to override. The modern, scalable approach is toggling predefined CSS classes using el.classList.add(), remove(), or toggle().\n\nExample:\n<code class="language-javascript">// const menu = document.querySelector('.menu');\n// menu.classList.toggle('menu-open');\nconsole.log('Class "menu-open" toggled dynamically');\n\nOutput:\n<code class="language-bash">Class "menu-open" toggled dynamically"
+},
+{
+"topic": "134. Reading computed styles (getComputedStyle)",
+"content": "JavaScript: 134. getComputedStyle\n\nThe el.style property ONLY returns inline styles. To read the true, final styling of an element applied by external CSS stylesheets, you must use the global window.getComputedStyle(el) method.\n\nExample:\n<code class="language-javascript">// const el = document.body;\n// const styles = window.getComputedStyle(el);\n// console.log(styles.backgroundColor);\nconsole.log('rgb(255, 255, 255)');\n\nOutput:\n<code class="language-bash">rgb(255, 255, 255)"
+},
+{
+"topic": "135. Controlling CSS Variables (Custom Properties) with JS",
+"content": "JavaScript: 135. Controlling CSS Variables\n\nJavaScript can natively read and write CSS custom properties (variables) on the DOM via style.setProperty(). This technique effortlessly powers global live theming (like instant dark mode toggling) across entire apps.\n\nExample:\n<code class="language-javascript">// document.documentElement.style.setProperty('--primary-color', '#ff0000');\nconsole.log('CSS Variable --primary-color updated to #ff0000');\n\nOutput:\n<code class="language-bash">CSS Variable --primary-color updated to #ff0000"
+},
+{
+"topic": "136. Web Components: defining custom elements",
+"content": "JavaScript: 136. Web Components\n\nWeb Components allow you to create reusable, framework-agnostic custom HTML tags. By extending HTMLElement and registering via customElements.define(), you gain access to powerful lifecycle callbacks.\n\nExample:\n<code class="language-javascript">// class MyBtn extends HTMLElement {\n//   connectedCallback() { this.innerHTML = 'Click'; }\n// }\n// customElements.define('my-btn', MyBtn);\nconsole.log('Custom element  registered successfully');\n\nOutput:\n<code class="language-bash">Custom element  registered successfully"
+},
+{
+"topic": "137. The Shadow DOM: Style encapsulation",
+"content": "JavaScript: 137. The Shadow DOM\n\nThe Shadow DOM attaches a hidden, heavily encapsulated DOM tree to a custom element. Styles defined inside the shadow root CANNOT leak out, and global CSS CANNOT leak in, ensuring pristine visual isolation.\n\nExample:\n<code class="language-javascript">// const shadow = this.attachShadow({ mode: 'open' });\n// shadow.innerHTML = 'p{color:red;}Isolated Text';\nconsole.log('Shadow DOM attached with strict style encapsulation');\n\nOutput:\n<code class="language-bash">Shadow DOM attached with strict style encapsulation"
+},
+{
+"topic": "138. HTML Templates and the slot element",
+"content": "JavaScript: 138. Templates & Slots\n\nThe <template> tag holds inert HTML that the browser parses but doesn't render. When combined with Shadow DOM, <slot> tags act as placeholders allowing developers to dynamically inject custom user content into predefined layouts.\n\nExample:\n<code class="language-javascript">// template.content.cloneNode(true); // clones the template\n// Users write: <h1 slot="title">Title\nconsole.log('Template cloned and slot populated');\n\nOutput:\n<code class="language-bash">Template cloned and slot populated"
+},
+{
+"topic": "139. The Fetch API: Making GET and POST requests",
+"content": "JavaScript: 139. The Fetch API\n\nfetch() is the modern, Promise-based native standard for network requests, heavily replacing XMLHttpRequest. By default, it issues GET requests. Passing an options object configures it for POSTs and body payloads.\n\nExample:\n<code class="language-javascript">// fetch('https://api.example.com/data', {\n//   method: 'POST',\n//   body: JSON.stringify({ action: 'create' })\n// });\nconsole.log('Promise pending for POST request');\n\nOutput:\n<code class="language-bash">Promise pending for POST request"
+},
+{
+"topic": "140. Fetch Response objects and body parsing (.json(), .text())",
+"content": "JavaScript: 140. Fetch Responses\n\nThe initial fetch Promise resolves with a Response object representing headers and status codes, not the actual body data. You must call asynchronous parser methods like .json() or .text() to stream the payload.\n\nExample:\n<code class="language-javascript">// async function get() {\n//   const res = await fetch('api/data');\n//   const data = await res.json(); // Second await handles data streaming\n// }\nconsole.log('{ data: "Successfully parsed" }');\n\nOutput:\n<code class="language-bash">{ data: "Successfully parsed" }"
+},
+{
+"topic": "141. Setting custom HTTP Headers in Fetch requests",
+"content": "JavaScript: 141. Fetch Headers\n\nYou configure HTTP headers in Fetch by supplying a headers object. Setting Content-Type: application/json is strictly mandatory when sending JSON payloads, and Authorization headers securely pass Bearer tokens to APIs.\n\nExample:\n<code class="language-javascript">// fetch('api/secure', { headers: { 'Authorization': 'Bearer 1234' } });\nconsole.log('Secure fetch initiated with Bearer token');\n\nOutput:\n<code class="language-bash">Secure fetch initiated with Bearer token"
+},
+{
+"topic": "142. Cross-Origin Resource Sharing (CORS) explained",
+"content": "JavaScript: 142. CORS explained\n\nCORS is a strict browser security mechanism blocking scripts from requesting APIs on different domains unless the server explicitly returns headers granting permission (e.g., Access-Control-Allow-Origin: *).\n\nExample:\n<code class="language-javascript">// If server denies cross-origin fetch:\n// console.error('TypeError: Failed to fetch (CORS block)');\nconsole.log('Network request blocked by CORS policy');\n\nOutput:\n<code class="language-bash">Network request blocked by CORS policy"
+},
+{
+"topic": "143. AbortController: Canceling in-flight network requests",
+"content": "JavaScript: 143. AbortController\n\nBecause Promises cannot natively be cancelled, the DOM provides AbortController. By passing its signal to a fetch call, invoking controller.abort() safely terminates the active network request and rejects the promise.\n\nExample:\n<code class="language-javascript">// const controller = new AbortController();\n// fetch('api/slow', { signal: controller.signal });\n// controller.abort(); // Triggers AbortError\nconsole.log('Fetch request instantly aborted');\n\nOutput:\n<code class="language-bash">Fetch request instantly aborted"
+},
+{
+"topic": "144. WebSockets for persistent, real-time communication",
+"content": "JavaScript: 144. WebSockets\n\nWebSockets upgrade HTTP to a persistent, fully bidirectional TCP connection. They are fundamentally necessary for low-latency real-time apps like multiplayer games, live chat, or cryptocurrency trading dashboards.\n\nExample:\n<code class="language-javascript">// const ws = new WebSocket('wss://api.example.com');\n// ws.onmessage = (event) => console.log('Server says: ' + event.data);\nconsole.log('Server says: Hello World');\n\nOutput:\n<code class="language-bash">Server says: Hello World"
+},
+{
+"topic": "145. Server-Sent Events (SSE) for unidirectional streams",
+"content": "JavaScript: 145. Server-Sent Events\n\nSSE via the EventSource API provides a robust, lightweight alternative to WebSockets when data only needs to flow in one direction (Server -> Client). It handles reconnections natively, ideal for stock tickers.\n\nExample:\n<code class="language-javascript">// const stream = new EventSource('/api/ticker');\n// stream.onmessage = (e) => console.log('Price update:', e.data);\nconsole.log('Price update: 150.00');\n\nOutput:\n<code class="language-bash">Price update: 150.00"
+},
+{
+"topic": "146. localStorage vs sessionStorage",
+"content": "JavaScript: 146. localStorage vs sessionStorage\n\nThe Web Storage API stores strings in the browser. localStorage persists permanently across sessions and tab closures. sessionStorage is strictly tied to the tab's lifespan, wiping data immediately when the specific tab closes.\n\nExample:\n<code class="language-javascript">// localStorage.setItem('theme', 'dark');\n// console.log(localStorage.getItem('theme'));\nconsole.log('dark');\n\nOutput:\n<code class="language-bash">dark"
+},
+{
+"topic": "147. Reading, writing, and securing browser Cookies",
+"content": "JavaScript: 147. Browser Cookies\n\nCookies hold small data primarily used for server sessions. Setting HttpOnly secures them from malicious XSS reads, while Secure ensures they only transmit over HTTPS connections.\n\nExample:\n<code class="language-javascript">// document.cookie = "user=123; Secure; SameSite=Strict; max-age=3600";\n// console.log(document.cookie);\nconsole.log('user=123');\n\nOutput:\n<code class="language-bash">user=123"
+},
+{
+"topic": "148. IndexedDB: Local NoSQL database for the browser",
+"content": "JavaScript: 148. IndexedDB\n\nIndexedDB is a low-level API for massive client-side storage of structured data, objects, and files. It provides highly performant NoSQL transactions but suffers from a notoriously complex callback-based API, often mitigated by wrapper libraries.\n\nExample:\n<code class="language-javascript">// const request = indexedDB.open('AppDB', 1);\n// request.onsuccess = (e) => console.log('DB Opened successfully');\nconsole.log('DB Opened successfully');\n\nOutput:\n<code class="language-bash">DB Opened successfully"
+},
+{
+"topic": "149. Web Workers: Moving heavy calculations off the main thread",
+"content": "JavaScript: 149. Web Workers\n\nWeb Workers instantiate true multithreading in the browser. You run intensive CPU tasks (like image processing or massive loops) in an isolated background thread, guaranteeing the main UI thread stays perfectly responsive.\n\nExample:\n<code class="language-javascript">// const worker = new Worker('worker.js');\n// worker.postMessage('Start Heavy Math');\n// worker.onmessage = (e) => console.log('Math done:', e.data);\nconsole.log('Math done: 999999');\n\nOutput:\n<code class="language-bash">Math done: 999999"
+},
+{
+"topic": "150. Service Workers and offline caching functionality",
+"content": "JavaScript: 150. Service Workers\n\nA Service Worker is a programmable network proxy intercepting all requests from the client. It enables offline experiences (PWAs) by caching assets dynamically and serving them instantly when network connectivity drops.\n\nExample:\n<code class="language-javascript">// navigator.serviceWorker.register('/sw.js').then(() => {\n//   console.log('Service Worker actively caching routes');\n// });\nconsole.log('Service Worker actively caching routes');\n\nOutput:\n<code class="language-bash">Service Worker actively caching routes"
+},
+{
+"topic": "151. The Geolocation API",
+"content": "JavaScript: 151. The Geolocation API\n\nWith user permission, the global navigator.geolocation object asynchronously fetches latitude/longitude coordinates via GPS or network data, crucial for mapping integration or location-specific app logic.\n\nExample:\n<code class="language-javascript">// navigator.geolocation.getCurrentPosition((pos) => {\n//   console.log(pos.coords.latitude, pos.coords.longitude);\n// });\nconsole.log('40.7128 -74.0060');\n\nOutput:\n<code class="language-bash">40.7128 -74.0060"
+},
+{
+"topic": "152. The Canvas API: Drawing 2D graphics",
+"content": "JavaScript: 152. The Canvas API\n\nThe HTML5 <canvas> element relies entirely on JavaScript for rendering pixel-based 2D shapes, charts, or games. By accessing the 2d context, you command highly performant paths, rectangles, and image composites.\n\nExample:\n<code class="language-javascript">// const ctx = canvas.getContext('2d');\n// ctx.fillStyle = 'red';\n// ctx.fillRect(10, 10, 100, 100); // x, y, width, height\nconsole.log('Drawn 100x100 red rectangle on canvas');\n\nOutput:\n<code class="language-bash">Drawn 100x100 red rectangle on canvas"
+},
+{
+"topic": "153. Intersection Observer for lazy loading elements",
+"content": "JavaScript: 153. Intersection Observer\n\nThe IntersectionObserver asynchronously tracks when elements enter or exit the visible viewport. It completely obsoletes ancient, sluggish scroll-listener geometry calculations for lazy-loading images or infinite scroll feeds.\n\nExample:\n<code class="language-javascript">// const observer = new IntersectionObserver(entries => {\n//   if(entries[0].isIntersecting) console.log('Element visible!');\n// });\n// observer.observe(imageElement);\nconsole.log('Element visible!');\n\nOutput:\n<code class="language-bash">Element visible!"
+},
+{
+"topic": "154. Mutation Observer for tracking DOM changes",
+"content": "JavaScript: 154. Mutation Observer\n\nThe MutationObserver actively watches a specific DOM tree for underlying structural changes—like nodes being appended, attributes changing, or text mutating—and fires a highly efficient callback batched with the alterations.\n\nExample:\n<code class="language-javascript">// const observer = new MutationObserver((mutations) => {\n//   console.log('DOM node mutated:', mutations[0].type);\n// });\n// observer.observe(document.body, { childList: true });\nconsole.log('DOM node mutated: childList');\n\nOutput:\n<code class="language-bash">DOM node mutated: childList"
+},
+{
+"topic": "155. Regular Expressions: Capture groups and lookaheads",
+"content": "JavaScript: 155. RegEx: Capture Groups & Lookaheads\n\nJavaScript regex natively supports capture groups () to extract substring variables, and Lookaheads (?=...) to validate that a string is followed by a pattern without including that pattern in the final matched result.\n\nExample:\n<code class="language-javascript">const regex = /(user)-(?=\d+)/;\n// Matches 'user-' ONLY if followed by numbers, capturing 'user'\nconsole.log(regex.exec('user-123')[1]);\n\nOutput:\n<code class="language-bash">user"
+}
+]
