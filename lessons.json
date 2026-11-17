@@ -1,9 +1,5 @@
 [
   {
-    "topic": "5. The V8 Engine: A brief intro to how JS runs",
-    "content": "<b>JavaScript: 5. The V8 Engine</b>\n\nV8 is Google's open-source high-performance JS engine written in C++. It parses JavaScript, translates it to an Abstract Syntax Tree (AST), and uses Just-In-Time (JIT) compilation to convert it directly to fast machine code.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">// V8 optimizes monomorphic functions heavily\nconst add = (a, b) => a + b;\nconsole.log(add(5, 10)); // JIT optimizes for Number inputs</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">15</code></pre>"
-  },
-  {
     "topic": "6. let vs const: When to use which",
     "content": "<b>JavaScript: 6. let vs const</b>\n\nDefault to const for variables to prevent reassignment and signal immutability of the reference. Use let strictly when you anticipate the variable's value changing, like loop counters.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">const MAX_USERS = 100;\nlet currentUsers = 0;\ncurrentUsers++;\nconsole.log({ MAX_USERS, currentUsers });</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">{ MAX_USERS: 100, currentUsers: 1 }</code></pre>"
   },
