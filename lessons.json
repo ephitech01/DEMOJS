@@ -1,9 +1,5 @@
 [
   {
-    "topic": "6. let vs const: When to use which",
-    "content": "<b>JavaScript: 6. let vs const</b>\n\nDefault to const for variables to prevent reassignment and signal immutability of the reference. Use let strictly when you anticipate the variable's value changing, like loop counters.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">const MAX_USERS = 100;\nlet currentUsers = 0;\ncurrentUsers++;\nconsole.log({ MAX_USERS, currentUsers });</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">{ MAX_USERS: 100, currentUsers: 1 }</code></pre>"
-  },
-  {
     "topic": "7. var and the dangers of Hoisting",
     "content": "<b>JavaScript: 7. var and Hoisting</b>\n\nVariables declared with var are function-scoped and hoisted to the top of their scope, initialized as undefined. This causes unpredictable behavior, which is why modern JS strictly uses let and const.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">console.log(legacyVar); // undefined, not a ReferenceError\nvar legacyVar = 'danger';\n// let modernVar; would throw a ReferenceError if accessed early</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">undefined</code></pre>"
   },
