@@ -1,9 +1,5 @@
 [
   {
-    "topic": "7. var and the dangers of Hoisting",
-    "content": "<b>JavaScript: 7. var and Hoisting</b>\n\nVariables declared with var are function-scoped and hoisted to the top of their scope, initialized as undefined. This causes unpredictable behavior, which is why modern JS strictly uses let and const.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">console.log(legacyVar); // undefined, not a ReferenceError\nvar legacyVar = 'danger';\n// let modernVar; would throw a ReferenceError if accessed early</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">undefined</code></pre>"
-  },
-  {
     "topic": "8. Block Scoping and the Temporal Dead Zone (TDZ)",
     "content": "<b>JavaScript: 8. Block Scoping & TDZ</b>\n\nlet and const are block-scoped (confined to {}). Accessing them before their declaration line throws a ReferenceError due to the Temporal Dead Zone (TDZ).\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">{\n  // TDZ starts\n  // console.log(safeVar); // Throws ReferenceError\n  const safeVar = 'active'; // TDZ ends\n  console.log(safeVar);\n}</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">active</code></pre>"
   },
