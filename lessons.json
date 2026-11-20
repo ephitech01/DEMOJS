@@ -1,9 +1,5 @@
 [
   {
-    "topic": "8. Block Scoping and the Temporal Dead Zone (TDZ)",
-    "content": "<b>JavaScript: 8. Block Scoping & TDZ</b>\n\nlet and const are block-scoped (confined to {}). Accessing them before their declaration line throws a ReferenceError due to the Temporal Dead Zone (TDZ).\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">{\n  // TDZ starts\n  // console.log(safeVar); // Throws ReferenceError\n  const safeVar = 'active'; // TDZ ends\n  console.log(safeVar);\n}</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">active</code></pre>"
-  },
-  {
     "topic": "9. The Global Object (globalThis vs window)",
     "content": "<b>JavaScript: 9. The Global Object</b>\n\nHistorically, the global object was window in browsers and global in Node.js. ES2020 introduced globalThis, providing a standard, environment-agnostic reference to the global scope.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">globalThis.customAppEnv = 'production';\nconsole.log(globalThis.customAppEnv);\nconsole.log(globalThis === window); // true in browser</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">production\ntrue</code></pre>"
   },
