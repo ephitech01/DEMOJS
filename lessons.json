@@ -1,9 +1,5 @@
 [
   {
-    "topic": "9. The Global Object (globalThis vs window)",
-    "content": "<b>JavaScript: 9. The Global Object</b>\n\nHistorically, the global object was window in browsers and global in Node.js. ES2020 introduced globalThis, providing a standard, environment-agnostic reference to the global scope.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">globalThis.customAppEnv = 'production';\nconsole.log(globalThis.customAppEnv);\nconsole.log(globalThis === window); // true in browser</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">production\ntrue</code></pre>"
-  },
-  {
     "topic": "10. Primitive Data Types Overview",
     "content": "<b>JavaScript: 10. Primitive Data Types</b>\n\nJavaScript has 7 primitive types: String, Number, BigInt, Boolean, Undefined, Null, and Symbol. Primitives are immutable and passed by value, meaning changes to one variable don't affect copied variables.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">const isPrimitive = typeof 'hello' === 'string';\nconst empty = null;\nconsole.log(`String? ${isPrimitive}, Null type? ${typeof empty}`);</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">String? true, Null type? object</code></pre>"
   },
