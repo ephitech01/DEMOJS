@@ -1,9 +1,5 @@
 [
   {
-    "topic": "10. Primitive Data Types Overview",
-    "content": "<b>JavaScript: 10. Primitive Data Types</b>\n\nJavaScript has 7 primitive types: String, Number, BigInt, Boolean, Undefined, Null, and Symbol. Primitives are immutable and passed by value, meaning changes to one variable don't affect copied variables.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">const isPrimitive = typeof 'hello' === 'string';\nconst empty = null;\nconsole.log(`String? ${isPrimitive}, Null type? ${typeof empty}`);</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">String? true, Null type? object</code></pre>"
-  },
-  {
     "topic": "11. String Methods (slice, substring, replaceAll)",
     "content": "<b>JavaScript: 11. String Methods</b>\n\nStrings in JS have built-in methods for manipulation without altering the original string. slice() extracts sections, while modern additions like replaceAll() eliminate the need for global regex flags.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">const text = \"foo bar foo\";\nconsole.log(text.slice(0, 3));\nconsole.log(text.replaceAll('foo', 'baz'));</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">foo\nbaz bar baz</code></pre>"
   },
