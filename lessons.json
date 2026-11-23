@@ -1,9 +1,5 @@
 [
   {
-    "topic": "11. String Methods (slice, substring, replaceAll)",
-    "content": "<b>JavaScript: 11. String Methods</b>\n\nStrings in JS have built-in methods for manipulation without altering the original string. slice() extracts sections, while modern additions like replaceAll() eliminate the need for global regex flags.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">const text = \"foo bar foo\";\nconsole.log(text.slice(0, 3));\nconsole.log(text.replaceAll('foo', 'baz'));</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">foo\nbaz bar baz</code></pre>"
-  },
-  {
     "topic": "12. Template Literals and Tagged Templates",
     "content": "<b>JavaScript: 12. Template Literals</b>\n\nTemplate literals (using backticks) allow multi-line strings and string interpolation via ${}. Tagged templates allow you to parse template literals with a custom function for advanced formatting or escaping.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">const tag = (strings, ...values) => strings[0] + values[0].toUpperCase();\nconst name = 'bob';\nconsole.log(tag`Hello ${name}`);</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">Hello BOB</code></pre>"
   },
