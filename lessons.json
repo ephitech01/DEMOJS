@@ -1,9 +1,5 @@
 [
   {
-    "topic": "13. The Math Object and Number methods",
-    "content": "<b>JavaScript: 13. The Math Object</b>\n\nThe Math object provides static properties and methods for mathematical constants and functions. Combined with Number methods like Number.isFinite(), it handles complex numeric operations safely.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">const num = 12.56;\nconsole.log(Math.floor(num));\nconsole.log(Number.isInteger(num));\nconsole.log(Math.max(10, 20, 5));</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">12\nfalse\n20</code></pre>"
-  },
-  {
     "topic": "14. BigInt for arbitrarily large integers",
     "content": "<b>JavaScript: 14. BigInt</b>\n\nBigInt is a primitive that allows representation of integers larger than Number.MAX_SAFE_INTEGER (2^53 - 1). It is created by appending n to the end of an integer literal.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">const maxSafe = Number.MAX_SAFE_INTEGER;\nconst massive = 9007199254740991n + 2n;\nconsole.log(massive);\nconsole.log(typeof massive);</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">9007199254740993n\nbigint</code></pre>"
   },
