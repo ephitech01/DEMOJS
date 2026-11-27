@@ -1,9 +1,5 @@
 [
   {
-    "topic": "15. Booleans and Truthy/Falsy Values",
-    "content": "<b>JavaScript: 15. Truthy/Falsy Values</b>\n\nIn boolean contexts (like if statements), JS coerces values to Booleans. The falsy values are false, 0, -0, 0n, \"\", null, undefined, and NaN. Everything else is truthy.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">const values = [0, \"hello\", [], null];\nconst truthyCheck = values.map(v => Boolean(v));\nconsole.log(truthyCheck);</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">[ false, true, true, false ]</code></pre>"
-  },
-  {
     "topic": "16. Null vs Undefined: The difference",
     "content": "<b>JavaScript: 16. Null vs Undefined</b>\n\nundefined means a variable has been declared but not assigned a value. null is an intentional assignment representing the absence of any object value. Use null to explicitly wipe a reference.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">let a;\nlet b = null;\nconsole.log(a === undefined); // true\nconsole.log(typeof b); // 'object' (historical bug)</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">true\nobject</code></pre>"
   },
