@@ -1,9 +1,5 @@
 [
   {
-    "topic": "16. Null vs Undefined: The difference",
-    "content": "<b>JavaScript: 16. Null vs Undefined</b>\n\nundefined means a variable has been declared but not assigned a value. null is an intentional assignment representing the absence of any object value. Use null to explicitly wipe a reference.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">let a;\nlet b = null;\nconsole.log(a === undefined); // true\nconsole.log(typeof b); // 'object' (historical bug)</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">true\nobject</code></pre>"
-  },
-  {
     "topic": "17. Symbols and Unique Identifiers",
     "content": "<b>JavaScript: 17. Symbols</b>\n\nSymbol is a primitive type representing a completely unique identifier. Symbols are heavily used as hidden or non-colliding object keys, ensuring properties don't clash during iteration or inheritance.\n\n<b>Example:</b>\n<pre><code class=\"language-javascript\">const id = Symbol('id');\nconst user = { name: 'Alice', [id]: 123 };\nconsole.log(user[id]);\nconsole.log(Object.keys(user)); // Symbol key is hidden</code></pre>\n\n<b>Output:</b>\n<pre><code class=\"language-bash\">123\n[ 'name' ]</code></pre>"
   },
